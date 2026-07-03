@@ -1,0 +1,90 @@
+"""Entry point: python -m extnded_thotz [--smoke SECONDS] [--once WAV]"""
+
+import argparse
+import logging
+import logging.handlers
+import socket
+import sys
+
+from . import APP_DISPLAY_NAME, config as config_mod
+
+SINGLETON_PORT = 48653
+
+
+def _setup_logging():
+    log_dir = config_mod.config_dir()
+    log_dir.mkdir(parents=True, exist_ok=True)
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    fmt = logging.Formatter("%(asctime)s %(levelname)s %(name)s: %(message)s")
+    file_handler = logging.handlers.RotatingFileHandler(
+        log_dir / "app.log", maxBytes=512_000, backupCount=2, encoding="utf-8"
+    )
+    file_handler.setFormatter(fmt)
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(fmt)
+    root.addHandler(file_handler)
+    root.addHandler(stream_handler)
+
+
+def _single_instance_guard():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        sock.bind(("127.0.0.1", SINGLETON_PORT))
+        return sock
+    except OSError:
+        sock.close()
+        return None
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(prog="extnded-thotz", description=APP_DISPLAY_NAME)
+    parser.add_argument("--smoke", type=float, default=0,
+                        help="run for N seconds then exit cleanly (self-test)")
+    parser.add_argument("--once", metavar="WAV",
+                        help="transcribe a WAV file and print the text (no GUI)")
+    args = parser.parse_args(argv)
+    _setup_logging()
+    log = logging.getLogger("extnded_thotz")
+
+    if args.once:
+        from .transcriber import _main as transcribe_main
+
+        return transcribe_main([args.once])
+
+    guard = _single_instance_guard()
+    if guard is None:
+        print(f"{APP_DISPLAY_NAME} is already running.")
+        return 1
+
+    import tkinter as tk
+
+    from .app import DictationApp
+    from .overlay import Overlay
+    from .tray import build_tray
+
+    cfg = config_mod.load_config()
+    config_mod.save_config(cfg)  # materialize defaults on first run
+
+    root = tk.Tk()
+    root.withdraw()
+    root.title(APP_DISPLAY_NAME)
+    overlay = Overlay(root)
+    app = DictationApp(root, overlay, cfg)
+    try:
+        icon = build_tray(app)
+        app.tray_icon = icon
+        icon.run_detached()
+    except Exception as exc:
+        log.warning("Tray unavailable, continuing without it: %s", exc)
+    app.start()
+    log.info("ready")
+    if args.smoke:
+        root.after(int(args.smoke * 1000), app.quit)
+    root.mainloop()
+    guard.close()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
