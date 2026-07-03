@@ -43,7 +43,16 @@ def main(argv=None) -> int:
                         help="run for N seconds then exit cleanly (self-test)")
     parser.add_argument("--once", metavar="WAV",
                         help="transcribe a WAV file and print the text (no GUI)")
+    parser.add_argument("--settings", action="store_true",
+                        help="open the settings window instead of the tray app")
     args = parser.parse_args(argv)
+
+    if args.settings:
+        from .settings_ui import main as settings_main
+
+        settings_main()
+        return 0
+
     _setup_logging()
     log = logging.getLogger("extnded_thotz")
 

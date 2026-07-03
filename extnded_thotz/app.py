@@ -102,7 +102,7 @@ class DictationApp:
         self._started_at = time.monotonic()
         self._set_tray_recording(True)
         if self.cfg.get("show_overlay", True):
-            self.ui(lambda: self.overlay.show("● Listening"))
+            self.ui(lambda: self.overlay.listen(lambda: self.recorder.input_level))
 
     def _hotkey_stop(self) -> None:
         if not self.recorder.is_recording:
@@ -183,7 +183,11 @@ class DictationApp:
                 pass
 
     def open_settings(self) -> None:
-        subprocess.Popen([sys.executable, "-m", "extnded_thotz.settings_ui"])
+        if getattr(sys, "frozen", False):
+            # PyInstaller build: sys.executable is ExtndedThotz.exe, which has no -m
+            subprocess.Popen([sys.executable, "--settings"])
+        else:
+            subprocess.Popen([sys.executable, "-m", "extnded_thotz.settings_ui"])
 
     # -- config hot-reload -------------------------------------------------------
     def _watch_config(self) -> None:

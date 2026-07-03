@@ -17,6 +17,7 @@ class LocalWhisperBackend:
     def __init__(self, model_size: str = "base"):
         self.model_size = model_size
         self._model = None
+        self._use_vad = False
         self._lock = threading.Lock()
 
     def load(self):
@@ -26,6 +27,10 @@ class LocalWhisperBackend:
                     from faster_whisper import WhisperModel
                 except ImportError as exc:
                     raise TranscriptionError("faster-whisper is not installed") from exc
+                # VAD stays off: push-to-talk already bounds the audio, VAD eats
+                # short utterances (observed removing a full 1.15s dictation), and
+                # its onnxruntime dep crashes PyInstaller analysis on Python 3.14.
+                self._use_vad = False
                 self._model = WhisperModel(self.model_size, device="cpu", compute_type="int8")
         return self
 
@@ -35,7 +40,7 @@ class LocalWhisperBackend:
         self.load()
         try:
             segments, _info = self._model.transcribe(
-                audio, language=language, beam_size=5, vad_filter=True
+                audio, language=language, beam_size=5, vad_filter=self._use_vad
             )
             return " ".join(seg.text.strip() for seg in segments).strip()
         except Exception as exc:
