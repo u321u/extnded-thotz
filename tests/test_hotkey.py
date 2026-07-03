@@ -1,4 +1,6 @@
-from extnded_thotz.hotkey import HotkeyController
+import pytest
+
+from extnded_thotz.hotkey import HotkeyController, ShortcutState, normalize_shortcut
 
 
 class FakeClock:
@@ -70,3 +72,29 @@ def test_explicit_cancel_only_while_recording():
     clock.now = 1.0
     ctl.release()
     assert calls == ["start", "cancel"]  # release after cancel is a no-op
+
+
+def test_normalize_shortcut():
+    assert normalize_shortcut(" Control + Shift + Space ") == "ctrl+shift+space"
+    assert normalize_shortcut("F9") == "f9"
+    with pytest.raises(ValueError):
+        normalize_shortcut("ctrl++space")
+    with pytest.raises(ValueError, match="reserved"):
+        normalize_shortcut("esc")
+
+
+def test_shortcut_state_chord_transitions():
+    state = ShortcutState("ctrl+shift+space")
+    assert state.feed("left ctrl", "down") is None
+    assert state.feed("shift", "down") is None
+    assert state.feed("space", "down") == "press"
+    assert state.feed("space", "down") is None
+    assert state.feed("space", "up") == "release"
+
+
+def test_shortcut_state_right_modifier_is_specific():
+    state = ShortcutState("right ctrl")
+    assert state.feed("left ctrl", "down") is None
+    assert state.feed("left ctrl", "up") is None
+    assert state.feed("right ctrl", "down") == "press"
+    assert state.feed("right ctrl", "up") == "release"

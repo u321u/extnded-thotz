@@ -21,8 +21,8 @@ python -m extnded_thotz
 
 The goat icon appears in your system tray. Then, in any app:
 
-1. **Hold Right Ctrl** and speak.
-2. A small **"● Listening"** pill appears at the bottom of the screen.
+1. **Hold Ctrl + Windows** and speak.
+2. A mic-reactive **Matrix listening display** appears at the bottom of the screen.
 3. **Release** — the pill switches to "… Transcribing", and a moment later your
    words are pasted at the cursor, cleaned up.
 
@@ -46,7 +46,9 @@ be turned off in Settings.
 Tray icon → **Settings…** (or `python -m extnded_thotz.settings_ui`). Changes
 apply to the running app within ~2 seconds — no restart needed.
 
-- **Dictation key / mode** — `right ctrl` hold-to-talk by default; or pick F9 etc. with `toggle` (tap to start, tap to stop).
+- **Dictation shortcut / mode** — click **Record…** and press any key or chord
+  (for example `right ctrl`, `F9`, or `ctrl+shift+space`), then choose hold-to-talk
+  or toggle (tap to start, tap to stop).
 - **Backend** — `auto` uses local Whisper unless an OpenAI API key is configured; force `local` or `openai`.
 - **Local model size** — `tiny`/`base` are fast; `small` is noticeably more accurate on a decent CPU; `large-v3` is best but slow without a GPU.
 - **AI polish** — optional second pass through `gpt-4o-mini` for smarter punctuation and false-start removal. Needs an API key; fails soft (you always get the local cleanup result).

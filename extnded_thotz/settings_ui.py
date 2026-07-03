@@ -5,12 +5,28 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 
 from . import APP_DISPLAY_NAME, config as config_mod
+from .hotkey import MODIFIERS, normalize_key_name, normalize_shortcut
 
 BG = "#111111"
 FG = "#f2f2f2"
 
-HOTKEY_CHOICES = ["right ctrl", "right shift", "f8", "f9", "scroll lock", "pause"]
 MODEL_CHOICES = ["tiny", "base", "small", "medium", "large-v3"]
+
+TK_KEY_NAMES = {
+    "Control_L": "left ctrl",
+    "Control_R": "right ctrl",
+    "Shift_L": "left shift",
+    "Shift_R": "right shift",
+    "Alt_L": "left alt",
+    "Alt_R": "right alt",
+    "Meta_L": "left windows",
+    "Meta_R": "right windows",
+    "Win_L": "left windows",
+    "Win_R": "right windows",
+    "space": "space",
+    "Return": "enter",
+    "Escape": "esc",
+}
 
 
 def main() -> None:
@@ -57,7 +73,87 @@ def main() -> None:
         ).grid(row=row, column=0, columnspan=2, sticky="w", pady=1)
         row += 1
 
-    label("Dictation key"); combo(hotkey_var, HOTKEY_CHOICES)
+    label("Dictation shortcut")
+    shortcut_frame = tk.Frame(body, bg=BG)
+    shortcut_frame.grid(row=row, column=1, sticky="we", pady=3)
+    shortcut_entry = tk.Entry(
+        shortcut_frame,
+        textvariable=hotkey_var,
+        width=17,
+        bg="#222222",
+        fg=FG,
+        insertbackground=FG,
+    )
+    shortcut_entry.pack(side="left", fill="x", expand=True)
+    capture_button = tk.Button(
+        shortcut_frame,
+        text="Record…",
+        bg="#222222",
+        fg=FG,
+        activebackground="#333333",
+        activeforeground=FG,
+        width=8,
+    )
+    capture_button.pack(side="left", padx=(6, 0))
+    row += 1
+    tk.Label(
+        body,
+        text="Type a shortcut or click Record, then press it.",
+        bg=BG,
+        fg="#a8a8a8",
+        anchor="w",
+        font=("Segoe UI", 8),
+    ).grid(row=row, column=1, sticky="w", pady=(0, 4))
+    row += 1
+
+    captured_keys = []
+    capture_bindings = []
+
+    def stop_capture(value=None):
+        for sequence, binding_id in capture_bindings:
+            root.unbind(sequence, binding_id)
+        capture_bindings.clear()
+        if value:
+            hotkey_var.set(normalize_shortcut("+".join(captured_keys)))
+        capture_button.config(text="Record…")
+        shortcut_entry.focus_set()
+
+    def capture_press(event):
+        key = normalize_key_name(TK_KEY_NAMES.get(event.keysym, event.keysym))
+        if key == "esc":
+            stop_capture()
+            return "break"
+        if key not in captured_keys:
+            captured_keys.append(key)
+        capture_button.config(text="Press…")
+        if key not in MODIFIERS:
+            stop_capture(key)
+        return "break"
+
+    def capture_release(event):
+        key = normalize_key_name(TK_KEY_NAMES.get(event.keysym, event.keysym))
+        if (
+            captured_keys
+            and all(item in MODIFIERS for item in captured_keys)
+            and key in captured_keys
+        ):
+            stop_capture(key)
+        return "break"
+
+    def start_capture():
+        if capture_bindings:
+            stop_capture()
+        captured_keys.clear()
+        capture_button.config(text="Press…")
+        shortcut_entry.focus_set()
+        capture_bindings.extend(
+            [
+                ("<KeyPress>", root.bind("<KeyPress>", capture_press)),
+                ("<KeyRelease>", root.bind("<KeyRelease>", capture_release)),
+            ]
+        )
+
+    capture_button.config(command=start_capture)
     label("Key mode"); combo(mode_var, ["hold", "toggle"])
     label("Transcription backend"); combo(backend_var, ["auto", "local", "openai"])
     label("Local model size"); combo(model_var, MODEL_CHOICES)
@@ -79,8 +175,14 @@ def main() -> None:
     check("Append trailing space after insert", space_var)
 
     def save() -> None:
+        try:
+            hotkey = normalize_shortcut(hotkey_var.get())
+        except ValueError as exc:
+            messagebox.showerror(APP_DISPLAY_NAME, str(exc))
+            shortcut_entry.focus_set()
+            return
         cfg.update(
-            hotkey=hotkey_var.get(), mode=mode_var.get(), backend=backend_var.get(),
+            hotkey=hotkey, mode=mode_var.get(), backend=backend_var.get(),
             model_size=model_var.get(), language=(language_var.get().strip() or None),
             llm_cleanup=llm_var.get(), injection=injection_var.get(),
             openai_api_key=api_key_var.get().strip(),

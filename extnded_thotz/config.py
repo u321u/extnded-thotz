@@ -7,7 +7,7 @@ from pathlib import Path
 APP_NAME = "ExtndedThotz"
 
 DEFAULTS = {
-    "hotkey": "right ctrl",     # key held (or toggled) to dictate
+    "hotkey": "ctrl+windows",   # key chord held (or toggled) to dictate
     "mode": "hold",             # hold | toggle
     "backend": "auto",          # auto (openai if key, else local) | local | openai
     "model_size": "base",       # faster-whisper: tiny|base|small|medium|large-v3

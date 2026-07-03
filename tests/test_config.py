@@ -7,7 +7,7 @@ def test_defaults_offline_first():
     cfg = config.load_config(path="Z:/does/not/exist.json")
     assert cfg["backend"] == "auto"
     assert cfg["model_size"] == "base"
-    assert cfg["hotkey"] == "right ctrl"
+    assert cfg["hotkey"] == "ctrl+windows"
     assert cfg["mode"] == "hold"
     assert cfg["injection"] == "paste"
 
