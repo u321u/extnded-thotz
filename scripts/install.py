@@ -48,12 +48,11 @@ def main() -> None:
     shell = win32com.client.Dispatch("WScript.Shell")
     desktop = Path(shell.SpecialFolders("Desktop"))
     programs = Path(shell.SpecialFolders("Programs"))
+    # NOTE: "THOTZ by Scout Goat" is a separate Electron app (its own exe on the
+    # Desktop) — do not create same-named shortcuts to this build. Profiles remain
+    # available via:  ExtndedThotz.exe --profile <name>
     print("shortcut:", _shortcut(shell, desktop, exe))
     print("shortcut:", _shortcut(shell, programs, exe))
-    print("shortcut:", _shortcut(shell, desktop, exe, name="Thotz by Scout Goat",
-                                 arguments="--profile scoutgoat"))
-    print("shortcut:", _shortcut(shell, programs, exe, name="Thotz by Scout Goat",
-                                 arguments="--profile scoutgoat"))
     if args.startup:
         print("shortcut:", _shortcut(shell, Path(shell.SpecialFolders("Startup")), exe))
     print("installed")
