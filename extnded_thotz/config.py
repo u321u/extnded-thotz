@@ -28,7 +28,9 @@ DEFAULTS = {
 
 def config_dir() -> Path:
     root = os.environ.get("APPDATA") or str(Path.home())
-    return Path(root) / APP_NAME
+    profile = os.environ.get("EXTNDED_THOTZ_PROFILE", "").strip()
+    folder = f"{APP_NAME}-{profile}" if profile else APP_NAME
+    return Path(root) / folder
 
 
 def config_path() -> Path:

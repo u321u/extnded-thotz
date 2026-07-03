@@ -3,8 +3,10 @@
 import argparse
 import logging
 import logging.handlers
+import os
 import socket
 import sys
+import zlib
 
 from . import APP_DISPLAY_NAME, config as config_mod
 
@@ -27,10 +29,17 @@ def _setup_logging():
     root.addHandler(stream_handler)
 
 
+def _singleton_port() -> int:
+    profile = os.environ.get("EXTNDED_THOTZ_PROFILE", "").strip()
+    if not profile:
+        return SINGLETON_PORT
+    return SINGLETON_PORT + 1 + (zlib.crc32(profile.encode("utf-8")) % 1000)
+
+
 def _single_instance_guard():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        sock.bind(("127.0.0.1", SINGLETON_PORT))
+        sock.bind(("127.0.0.1", _singleton_port()))
         return sock
     except OSError:
         sock.close()
@@ -45,7 +54,14 @@ def main(argv=None) -> int:
                         help="transcribe a WAV file and print the text (no GUI)")
     parser.add_argument("--settings", action="store_true",
                         help="open the settings window instead of the tray app")
+    parser.add_argument("--profile", default="",
+                        help="named settings profile — own config, history, and instance lock")
     args = parser.parse_args(argv)
+
+    if args.profile:
+        # Everything (config dir, history, log, singleton port, child processes)
+        # derives from this env var, so set it before anything reads config.
+        os.environ["EXTNDED_THOTZ_PROFILE"] = args.profile.strip()
 
     if args.settings:
         from .settings_ui import main as settings_main

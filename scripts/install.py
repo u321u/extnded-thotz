@@ -15,14 +15,16 @@ BUILD = PROJECT / "dist" / "ExtndedThotz"
 APP_NAME = "Extnded Thotz"
 
 
-def _shortcut(shell, folder: Path, target: Path) -> Path:
+def _shortcut(shell, folder: Path, target: Path, name: str = APP_NAME,
+              arguments: str = "") -> Path:
     folder.mkdir(parents=True, exist_ok=True)
-    path = folder / f"{APP_NAME}.lnk"
+    path = folder / f"{name}.lnk"
     lnk = shell.CreateShortcut(str(path))
     lnk.TargetPath = str(target)
+    lnk.Arguments = arguments
     lnk.WorkingDirectory = str(target.parent)
     lnk.IconLocation = str(target)
-    lnk.Description = "Extnded Thotz — hold a key, speak, get text"
+    lnk.Description = f"{name} — hold a key, speak, get text"
     lnk.Save()
     return path
 
@@ -44,8 +46,14 @@ def main() -> None:
     exe = install_dir / "ExtndedThotz.exe"
 
     shell = win32com.client.Dispatch("WScript.Shell")
-    print("shortcut:", _shortcut(shell, Path(shell.SpecialFolders("Desktop")), exe))
-    print("shortcut:", _shortcut(shell, Path(shell.SpecialFolders("Programs")), exe))
+    desktop = Path(shell.SpecialFolders("Desktop"))
+    programs = Path(shell.SpecialFolders("Programs"))
+    print("shortcut:", _shortcut(shell, desktop, exe))
+    print("shortcut:", _shortcut(shell, programs, exe))
+    print("shortcut:", _shortcut(shell, desktop, exe, name="Thotz by Scout Goat",
+                                 arguments="--profile scoutgoat"))
+    print("shortcut:", _shortcut(shell, programs, exe, name="Thotz by Scout Goat",
+                                 arguments="--profile scoutgoat"))
     if args.startup:
         print("shortcut:", _shortcut(shell, Path(shell.SpecialFolders("Startup")), exe))
     print("installed")
