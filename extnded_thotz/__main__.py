@@ -63,7 +63,20 @@ def main(argv=None) -> int:
 
     guard = _single_instance_guard()
     if guard is None:
-        print(f"{APP_DISPLAY_NAME} is already running.")
+        message = (
+            f"{APP_DISPLAY_NAME} is already running.\n\n"
+            "Look for the goat icon in the system tray — it may be hidden "
+            "behind the ^ overflow arrow next to the clock."
+        )
+        print(message)
+        try:
+            # Windowed (pyinstaller --noconsole) builds have no stdout, so a
+            # silent exit here looks like "the app won't open" — show a dialog.
+            import ctypes
+
+            ctypes.windll.user32.MessageBoxW(None, message, APP_DISPLAY_NAME, 0x40)
+        except Exception:
+            pass
         return 1
 
     import tkinter as tk
