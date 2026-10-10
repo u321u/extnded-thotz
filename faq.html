@@ -38,6 +38,25 @@
       });
     </script>
     <script defer src="/script.js"></script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Is Extnded Thotz really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is completely free to download and use — no account, no license key, no upsell, no feature paywall." } },
+          { "@type": "Question", "name": "Does it send my audio to the cloud?", "acceptedAnswer": { "@type": "Answer", "text": "No. By default, transcription runs entirely on your machine using a local Whisper model. Your audio never leaves your computer." } },
+          { "@type": "Question", "name": "Do I need Python installed?", "acceptedAnswer": { "@type": "Answer", "text": "No. The download is a portable Windows executable. Run it directly — no dependencies, no install wizard, nothing to configure." } },
+          { "@type": "Question", "name": "Which Windows versions are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Windows 10 and Windows 11 (64-bit). There are currently no macOS or Linux builds." } },
+          { "@type": "Question", "name": "Can I change the hotkey?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Open the settings window from the tray icon and record any key or chord. You can also switch between hold-to-talk and toggle mode." } },
+          { "@type": "Question", "name": "Does it work in every app?", "acceptedAnswer": { "@type": "Answer", "text": "It works in virtually any app that accepts text input. If an app runs as Administrator, you must run Extnded Thotz as Administrator too (a Windows UIPI restriction)." } },
+          { "@type": "Question", "name": "How big is the download?", "acceptedAnswer": { "@type": "Answer", "text": "The executable is about 22 MB. On first run it may download the Whisper base model once, around 145 MB, so transcription works offline from then on." } },
+          { "@type": "Question", "name": "Is my clipboard safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app saves your clipboard before inserting dictated text and restores it immediately after, every time." } },
+          { "@type": "Question", "name": "Can I cancel mid-sentence?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Press ESC while recording to cancel — nothing is transcribed, nothing is inserted." } },
+          { "@type": "Question", "name": "Is there a macOS version?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet. Extnded Thotz is Windows-first; a macOS build is in the works — email hello@scoutgoat.com to be notified when it ships." } }
+        ]
+      }
+    </script>
   </head>
   <body>
     <canvas id="rain" aria-hidden="true"></canvas>
