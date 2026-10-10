@@ -125,18 +125,13 @@
             <kbd>Ctrl</kbd><kbd>Windows</kbd>
             <span>hold to talk · release to paste</span>
           </p>
-          <div class="panel">
+          <div class="panel" id="console">
             <div class="panel-bar">
               <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-              <span class="panel-title">extnded_thotz — dictating</span>
+              <span class="panel-title" id="console-state">_idle</span>
             </div>
-            <div class="panel-body">
-              <p class="dim">&gt; hold ctrl + windows</p>
-              <p class="dim">&gt; speak naturally</p>
-              <p class="listen">
-                &gt; listening<span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-              </p>
-              <p class="gold">&gt; polished text lands at your cursor<span class="caret" aria-hidden="true"></span></p>
+            <div class="panel-body" id="console-body" aria-live="polite">
+              <p class="dim">&gt; ready — speak anytime</p>
             </div>
           </div>
           <div class="grid502">
@@ -151,6 +146,20 @@
           </div>
         </div>
       </section>
+
+      <!-- ═══════════ VOICE STRIP ═══════════ -->
+      <div class="voice-strip" data-reveal aria-label="Things people say while dictating">
+        <div class="voice-track">
+          <span class="voice-chip"><b>invoice to Maria before Friday</b> — said it, didn't type it</span>
+          <span class="voice-chip"><b>ship the overlay</b> — mid-thought, no hands</span>
+          <span class="voice-chip"><b>standup note: rain effect done</b> — notes on the walk</span>
+          <span class="voice-chip"><b>reply: that works for me</b> — inbox zero at speaking pace</span>
+          <span class="voice-chip"><b>invoice to Maria before Friday</b> — said it, didn't type it</span>
+          <span class="voice-chip"><b>ship the overlay</b> — mid-thought, no hands</span>
+          <span class="voice-chip"><b>standup note: rain effect done</b> — notes on the walk</span>
+          <span class="voice-chip"><b>reply: that works for me</b> — inbox zero at speaking pace</span>
+        </div>
+      </div>
 
       <!-- ═══════════ SPEAK IN THEIR WORDS ═══════════ -->
       <section class="section shell" data-reveal>
@@ -172,7 +181,7 @@
           <h2>Everything you need, <span class="serif">nothing you don't</span></h2>
         </div>
         <div class="bento-grid">
-          <article class="bento-card bx-brand">
+          <article class="bento-card bx-brand" data-reveal>
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 3c-2.5 3-4.5 6.5-4.5 10a4.5 4.5 0 0 0 9 0c0-3.5-2-7-4.5-10Z"/></svg>
             </div>
@@ -181,7 +190,7 @@
             <span class="bento-metric"><strong>0 audio uploads</strong> — by design, not policy</span>
           </article>
 
-          <article class="bento-card bx-mp3">
+          <article class="bento-card bx-mp3" data-reveal>
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M4 4h16v10a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V4Z"/><path d="m9 19-2 3m8-3 2 3"/><path d="M11.5 9.5v3m5-4.5-5 3-5-3v-3l5 3 5-3Z"/></svg>
             </div>
@@ -194,7 +203,7 @@
             </div>
           </article>
 
-          <article class="bento-card bx-hotkey">
+          <article class="bento-card bx-hotkey" data-reveal>
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h.01M12 10h.01M16 10h.01M9 14h6"/></svg>
             </div>
@@ -203,7 +212,7 @@
             <p class="keycap-row"><kbd>Ctrl</kbd><kbd>Windows</kbd></p>
           </article>
 
-          <article class="bento-card bx-clean">
+          <article class="bento-card bx-clean" data-reveal class="dim-1">
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 2c-3 3.6-5 7.6-5 10.5a5 5 0 0 0 10 0C17 9.6 15 5.6 12 2Z"/></svg>
             </div>
@@ -211,7 +220,7 @@
             <p>A subtle overlay reacts to your voice while it listens, so you always know exactly when you're being transcribed.</p>
           </article>
 
-          <article class="bento-card bx-overlay">
+          <article class="bento-card bx-overlay" data-reveal class="dim-2">
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
