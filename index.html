@@ -3,39 +3,35 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Extnded Thotz | Dictate faster on Windows with local AI transcription</title>
+    <title>Extnded Thotz — Free voice dictation for Windows</title>
     <meta
       name="description"
-      content="Dictate anywhere on Windows with a global hotkey. Local Whisper transcription, Matrix-style overlay, and instant text insertion. Private, fast, and free to try."
+      content="Free Windows voice dictation app. Global hotkey, local Whisper transcription, Matrix-style listening overlay. No cloud by default."
     />
-    <meta name="theme-color" content="#050403" />
+    <meta name="theme-color" content="#0a0a0b" />
     <link rel="canonical" href="https://extnded-thotz.vercel.app/" />
 
     <meta property="og:site_name" content="Extnded Thotz" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Extnded Thotz | Dictate faster on Windows with local transcription" />
+    <meta property="og:title" content="Extnded Thotz — Free voice dictation for Windows" />
     <meta
       property="og:description"
-      content="Hold Ctrl+Windows, speak, get text instantly. 100% local Whisper transcription. Private by design. Works in any app."
+      content="Free Windows voice dictation. Hold a hotkey, speak, get text. Local Whisper transcription, no cloud by default."
     />
     <meta property="og:url" content="https://extnded-thotz.vercel.app/" />
     <meta property="og:image" content="https://extnded-thotz.vercel.app/assets/og.png" />
-    <meta property="og:image:alt" content="Extnded Thotz — voice dictation for Windows" />
+    <meta property="og:image:alt" content="Extnded Thotz — free Windows voice dictation" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Extnded Thotz | Dictate faster on Windows" />
+    <meta name="twitter:title" content="Extnded Thotz — Free voice dictation for Windows" />
     <meta
       name="twitter:description"
-      content="Type less. Say more. Dictate anywhere on Windows with private, local transcription."
+      content="Free voice dictation for Windows. No cloud by default. Hold Ctrl+Windows and get text instantly."
     />
     <meta name="twitter:image" content="https://extnded-thotz.vercel.app/assets/og.png" />
 
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-
-    <link rel="preload" href="/fonts/Fraunces-var.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/IBMPlexMono-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />    <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
     <script>
       document.documentElement.classList.remove("no-js");
@@ -56,14 +52,13 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Extnded Thotz",
-        "description": "Windows voice dictation app with system-wide hotkey, local Whisper transcription, and Matrix-style listening overlay.",
+        "description": "Free Windows voice dictation app with a system-wide hotkey, local Whisper transcription, and a Matrix-style listening overlay.",
         "operatingSystem": "Windows 10, Windows 11",
         "applicationCategory": "BusinessApplication",
         "url": "https://extnded-thotz.vercel.app/",
         "downloadUrl": "https://extnded-thotz.vercel.app/download",
         "image": "https://extnded-thotz.vercel.app/assets/og.png",
-        "author": { "@type": "Organization", "name": "Scout Goat" },
-        "offers": { "@type": "Offer", "price": "29.00", "priceCurrency": "USD" }
+        "author": { "@type": "Organization", "name": "Scout Goat" }
       }
     </script>
   </head>
@@ -72,43 +67,44 @@
     <div class="bg-orbs" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="topbar shell">
-      <a class="brand" href="/">
-        <img src="/assets/logo.png" alt="Extnded Thotz logo" width="44" height="44" />
-        <div>
-          <span class="brand-house">Scout Goat</span>
-          <strong class="brand-name">Extnded Thotz</strong>
-        </div>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="#features">Features</a>
-        <a href="#how">How it works</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/faq">FAQ</a>
-        <a class="nav-cta" href="/download">Download for Windows</a>
-      </nav>
+    <header>
+      <div class="shell header-inner">
+        <a class="brand" href="/">
+          <img src="/assets/logo.png" alt="Extnded Thotz logo" width="36" height="36" />
+          <span>
+            <span class="brand-house">Scout Goat</span>
+            <strong class="brand-name">Extnded Thotz</strong>
+          </span>
+        </a>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/faq">FAQ</a>
+          <a class="nav-cta" href="/download">Download</a>
+        </nav>
+      </div>
     </header>
 
     <main id="main">
       <section class="hero shell" data-reveal>
         <div class="hero-copy">
-          <p class="hero-status is-listening">
-            <span class="status-dot" aria-hidden="true"></span>Private · Local · Lightning fast
+          <p class="hero-status Free by default">
+            <span class="status-dot" aria-hidden="true"></span>            Free · Local · Offline by default
           </p>
-          <h1>Type less. Say more.<span class="caret" aria-hidden="true"></span></h1>
+          <h1>Free voice dictation for Windows. No cloud. No subscription.</h1>
           <p class="lede">
-            Extnded Thotz turns your voice into polished text in any Windows app. Hold a global hotkey, speak naturally,
-            and watch your words appear at the cursor. No cloud. No typing fatigue. Just pure flow.
+            Extnded Thotz is a free Windows dictation app. Hold a hotkey, speak, release, and your words appear at the cursor. Transcription is local by default and your audio never leaves your machine.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="/download">Download for Windows - Free to try</a>
+            <a class="button primary" href="/download">Download for Windows — free</a>
             <a class="button secondary" href="#features">See what it does</a>
           </div>
           <ul class="hero-points">
+            <li>Free to download and use</li>
             <li>Local Whisper transcription</li>
             <li>Works in any Windows app</li>
-            <li>Matrix-style listening overlay</li>
-            <li>One-time $29 — yours to keep</li>
+            <li>Optional $29 Pro license</li>
           </ul>
         </div>
 
@@ -143,67 +139,64 @@
 
       <section class="section shell" id="social-proof" data-reveal>
         <div class="section-heading center">
-          <p class="eyebrow">Built for speed</p>
-          <h2>Dictate anywhere. Code, write, reply faster.</h2>
+          <p class="eyebrow">In plain English</p>
+          <h2>What makes it different</h2>
         </div>
         <div class="proof-grid">
           <div class="proof-card">
-            <div class="proof-stat">100%</div>
-            <div class="proof-label">Local transcription</div>
-            <p class="proof-text">Your audio never leaves your machine. Privacy by design.</p>
+            <div class="proof-stat">Free</div>
+            <div class="proof-label">To download</div>              <p class="proof-text">Download and run the portable Windows build. No payment required.</p>
           </div>
           <div class="proof-card">
-            <div class="proof-stat">Instant</div>
-            <div class="proof-label">Text insertion</div>
-            <p class="proof-text">Release the hotkey and your words paste at the cursor. No UI friction.</p>
+            <div class="proof-stat">Local</div>
+            <div class="proof-label">Whisper transcription</div>
+            <p class="proof-text">Your audio never leaves your machine. Privacy by default.</p>
           </div>
           <div class="proof-card">
-            <div class="proof-stat">Any App</div>
-            <div class="proof-label">Universal hotkey</div>
+            <div class="proof-stat">Any app</div>
+            <div class="proof-label">global ctrl + windows</div>
             <p class="proof-text">Works in VS Code, Slack, Notepad++, Chrome, Outlook, and more.</p>
           </div>
           <div class="proof-card">
-            <div class="proof-stat">$29</div>
-            <div class="proof-label">One-time price</div>
-            <p class="proof-text">No subscription. All current updates included. Yours to keep.</p>
+            <div class="proof-stat">$29 optional</div>
+            <div class="proof-label">Optional Pro</div>              <p class="proof-text">Upgrade only if you want a license. Free to use indefinitely.</p>
           </div>
         </div>
       </section>
 
       <section class="section shell" id="features" data-reveal>
         <div class="section-heading">
-          <p class="eyebrow">Premium features</p>
-          <h2>Everything you need to dictate with confidence</h2>
-          <p class="lede">Built like a professional tool. Polished, fast, and reliable.</p>
+          <p class="eyebrow">Features</p>
+          <h2>A small set of things it actually does well</h2>
         </div>
         <div class="feature-grid premium">
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🔒</div>
+            <div class="feature-icon" aria-hidden="true"></div>
             <h3>Private by default</h3>
             <p>Local Whisper transcription means your voice stays on your machine. No cloud APIs required unless you opt in.</p>
           </article>
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">⚡</div>
-            <h3>Lightning fast</h3>
+            <div class="feature-icon" aria-hidden="true"></div>
+            <h3>Fast in practice</h3>
             <p>Hold, speak, release. Cleaned text appears instantly at your cursor so you never break your flow.</p>
           </article>
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🎯</div>
+            <div class="feature-icon" aria-hidden="true"></div>
             <h3>Global hotkey</h3>
             <p>Customizable <code>Ctrl+Windows</code> (or your choice). Hold-to-talk or toggle mode to fit your workflow.</p>
           </article>
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🖥️</div>
+            <div class="feature-icon" aria-hidden="true"></div>
             <h3>Matrix-style overlay</h3>
             <p>Know exactly when it's listening and transcribing. Clean, minimal, and unmistakably premium.</p>
           </article>
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">📋</div>
+            <div class="feature-icon" aria-hidden="true"></div>
             <h3>Clipboard restore</h3>
             <p>Automatically saves and restores your clipboard. No lost content when pasting dictated text.</p>
           </article>
           <article class="feature-card">
-            <div class="feature-icon" aria-hidden="true">🚀</div>
+            <div class="feature-icon" aria-hidden="true"></div>
             <h3>Portable & easy</h3>
             <p>Single Windows .exe — no Python, no install hassle. Download, run, and start dictating in seconds.</p>
           </article>
@@ -253,7 +246,7 @@
               <tr>
                 <td>Local/offline by default</td>
                 <td>Mixed / cloud-assisted</td>
-                <td><span class="check">✓</span> 100% local with Whisper</td>
+                <td><span class="check">✓</span> Free local Whisper transcription</td>
               </tr>
               <tr>
                 <td>Global hotkey anywhere</td>
@@ -283,33 +276,13 @@
               <tr>
                 <td>Price</td>
                 <td>Free (with OS)</td>
-                <td><span class="check">✓</span> $29 one-time, yours to keep</td>
+                <td><span class="check">✓</span> Free to download · $29 optional Pro</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-      <section class="section shell" id="testimonials" data-reveal>
-        <div class="section-heading center">
-          <p class="eyebrow">Loved by power users</p>
-          <h2>Stop typing. Start flowing.</h2>
-        </div>
-        <div class="testimonials-grid">
-          <blockquote class="testimonial">
-            <p>“Extnded Thotz is the fastest way to get thoughts into my editor. The overlay is slick and I love that it's fully local.”</p>
-            <cite>— Developer, VS Code user</cite>
-          </blockquote>
-          <blockquote class="testimonial">
-            <p>“Finally a dictation tool that doesn't feel like it was bolted on. Feels polished, premium, and actually useful.”</p>
-            <cite>— Technical Writer</cite>
-          </blockquote>
-          <blockquote class="testimonial">
-            <p>“The hotkey + instant paste is perfect for support replies. I can clear my inbox so much faster now.”</p>
-            <cite>— Customer Support Lead</cite>
-          </blockquote>
-        </div>
-      </section>
 
       <section class="section shell faq-teaser" data-reveal>
         <div class="section-heading">
@@ -337,10 +310,10 @@
 
       <section class="section final-cta shell" data-reveal>
         <div class="cta-glow"></div>
-        <h2>Dictate like a pro. Save hours every week.</h2>
-        <p class="lede">Type less. Think more. Get your words down instantly with private, local dictation.</p>
+        <h2>Free Windows dictation. Pick it up now.</h2>
+        <p class="lede">Free Windows voice dictation. Hold Ctrl + Windows, speak, release. Pick up every time you would have typed.</p>
         <div class="hero-actions">
-          <a class="button primary large" href="/download">Download for Windows - Free to try</a>
+          <a class="button primary large" href="/download">Download for Windows — free</a>
           <a class="button secondary" href="/pricing">View pricing</a>
         </div>
       </section>
