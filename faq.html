@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FAQ | Extnded Thotz — Voice dictation for Windows</title>
+    <meta name="description" content="Frequently asked questions about Extnded Thotz: privacy, local Whisper, hotkeys, licensing, Windows compatibility." />
+    <meta name="theme-color" content="#050403" />
+    <link rel="canonical" href="https://extnded-thotz.vercel.app/faq" />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+
+    <link rel="preload" href="/fonts/Fraunces-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/IBMPlexMono-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/styles.css" />
+    <script>
+      document.documentElement.classList.remove("no-js");
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          if (!window.__revealReady) {
+            document.querySelectorAll("[data-reveal]").forEach(function (el) {
+              el.classList.add("is-visible");
+            });
+          }
+        }, 600);
+      });
+    </script>
+    <script defer src="/script.js"></script>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="bg-orbs" aria-hidden="true"></div>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="topbar shell">
+      <a class="brand" href="/">
+        <img src="/assets/logo.png" alt="Extnded Thotz logo" width="44" height="44" />
+        <div>
+          <span class="brand-house">Scout Goat</span>
+          <strong class="brand-name">Extnded Thotz</strong>
+        </div>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/download">Download</a>
+        <a href="/pricing">Pricing</a>
+        <a class="nav-cta" href="/faq" aria-current="page">FAQ</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="section shell page-hero" data-reveal>
+        <p class="eyebrow">FAQ</p>
+        <h1>Everything you need to know</h1>
+        <p class="lede">
+          Privacy, compatibility, setup, licensing — straight answers to help you decide if Extnded Thotz is right for you.
+        </p>
+      </section>
+
+      <section class="section shell" data-reveal>
+        <div class="faq-grid">
+          <details open>
+            <summary>Does it send audio to the cloud?</summary>
+            <p>
+              No. By default, transcription runs entirely on your machine using local Whisper. Your audio never leaves your
+              computer unless you explicitly enable a cloud backend or AI polish features.
+            </p>
+          </details>
+          <details>
+            <summary>Do I need Python installed?</summary>
+            <p>No. The download is a portable Windows executable. Just download and run it — no dependencies, no install wizard.</p>
+          </details>
+          <details>
+            <summary>Which Windows versions are supported?</summary>
+            <p>Windows 10 and Windows 11. The app is optimized for modern Windows. There are no macOS or Linux builds yet.</p>
+          </details>
+          <details>
+            <summary>Can I change the hotkey?</summary>
+            <p>Yes. Open the settings window and record any key or chord. You can also choose between hold-to-talk and toggle mode.</p>
+          </details>
+          <details>
+            <summary>Does it work in every app?</summary>
+            <p>
+              It works in virtually any app that accepts text input (VS Code, Slack, Notepad++, Chrome, Firefox, Outlook, etc.).
+              If an app runs as Administrator, you'll need to run Extnded Thotz as Administrator too due to Windows' UIPI
+              (User Interface Privilege Isolation).
+            </p>
+          </details>
+          <details>
+            <summary>How much does it cost?</summary>
+            <p>$29 one-time for Extnded Thotz Pro. No subscription, no recurring fees. All current updates are included.</p>
+          </details>
+          <details>
+            <summary>Can I try it before buying?</summary>
+            <p>Yes. Download the free build and use it as long as you want. If you love it, purchase a license. No trial timer.</p>
+          </details>
+          <details>
+            <summary>How big is the download?</summary>
+            <p>The executable is ~22 MB. On first run, it will download the Whisper base model (~145 MB) once.</p>
+          </details>
+          <details>
+            <summary>Is my clipboard safe?</summary>
+            <p>Yes. Extnded Thotz automatically saves and restores your clipboard when inserting dictated text.</p>
+          </details>
+          <details>
+            <summary>Can I cancel mid-dictation?</summary>
+            <p>Yes — press ESC at any time to cancel without inserting anything.</p>
+          </details>
+        </div>
+
+        <div class="hero-actions" style="margin-top: 40px;">
+          <a class="button primary" href="/download">Download for Windows</a>
+          <a class="button secondary" href="/pricing">View pricing</a>
+        </div>
+      </section>
+
+      <section class="section final-cta shell" data-reveal>
+        <div class="cta-glow"></div>
+        <h2>Ready to dictate like a pro?</h2>
+        <p class="lede">Get started in seconds. Private, fast, and built to last.</p>
+        <div class="hero-actions">
+          <a class="button primary large" href="/download">Download for Windows</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-inner">
+        <span>© 2026 Extnded Thotz — voice dictation by Scout Goat</span>
+        <span class="footer-links">
+          <a href="/">Home</a>
+          <a href="/#features">Features</a>
+          <a href="/pricing">Pricing</a>
+          <a href="/faq">FAQ</a>
+          <a href="/download">Download</a>
+          <a href="mailto:hello@scoutgoat.com">Contact</a>
+        </span>
+      </div>
+    </footer>
+  </body>
+</html>
