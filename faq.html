@@ -3,18 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FAQ — Free Windows voice dictation</title>
-    <meta name="description" content="Frequently asked questions about Extnded Thotz: privacy, local Whisper, hotkeys, licensing, Windows compatibility." />
-    <meta name="theme-color" content="#0a0a0b" />
+    <title>FAQ — Extnded Thotz, free Windows voice dictation</title>
+    <meta
+      name="description"
+      content="Frequently asked questions about Extnded Thotz: privacy and local Whisper transcription, hotkeys, app compatibility, download size, and clipboard safety."
+    />
+    <meta name="theme-color" content="#0b0b0d" />
     <link rel="canonical" href="https://extnded-thotz.vercel.app/faq" />
+    <meta property="og:site_name" content="Extnded Thotz" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="FAQ — Extnded Thotz, free Windows voice dictation" />
+    <meta
+      property="og:description"
+      content="Privacy, compatibility, setup, and download size — straight answers about Extnded Thotz."
+    />
+    <meta property="og:url" content="https://extnded-thotz.vercel.app/faq" />
+    <meta property="og:image" content="https://extnded-thotz.vercel.app/assets/og.png" />
 
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-
-    <link rel="preload" href="/fonts/Fraunces-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/IBMPlexMono-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
     <script>
       document.documentElement.classList.remove("no-js");
@@ -32,12 +41,11 @@
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
-    <div class="bg-orbs" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <header class="topbar shell">
+    <header class="shell topbar">
       <a class="brand" href="/">
-        <img src="/assets/logo.png" alt="Extnded Thotz" width="30" height="30" />
+        <img src="/assets/logo.png" alt="Extnded Thotz" width="34" height="34" />
         <div>
           <span class="brand-house">Thotz by Scout Goat</span>
           <strong class="brand-name">Extnded Thotz</strong>
@@ -53,63 +61,59 @@
 
     <main id="main">
       <section class="section shell page-hero" data-reveal>
-        <p class="eyebrow">Free app</p>
-        <h1>Everything you need to know</h1>
+        <p class="eyebrow">Straight answers</p>
+        <h1>Frequently asked questions</h1>
         <p class="lede">
-          Privacy, compatibility, setup, licensing — straight answers to help you decide if Extnded Thotz is right for you.
+          Privacy, compatibility, setup, download size — everything you might want to know
+          before picking up a free copy of Extnded Thotz.
         </p>
       </section>
 
       <section class="section shell" data-reveal>
         <div class="faq-grid">
           <details open>
-            <summary>Is Extnded Thotz free?</summary>
-            <p>Yes. Extnded Thotz is completely free to download and use on Windows.</p>
+            <summary>Is Extnded Thotz really free?</summary>
+            <p>Yes. It is completely free to download and use — no account, no license key, no upsell, no feature paywall.</p>
           </details>
           <details>
-            <summary>Does it send audio to the cloud?</summary>
-            <p>              No. By default, transcription runs entirely on your machine using local Whisper. Your audio never leaves your computer.
-</p>
+            <summary>Does it send my audio to the cloud?</summary>
+            <p>No. By default, transcription runs entirely on your machine using a local Whisper model. Your audio never leaves your computer.</p>
           </details>
           <details>
             <summary>Do I need Python installed?</summary>
-            <p>No. The download is a portable Windows executable. Just download and run it — no dependencies, no install wizard.</p>
+            <p>No. The download is a portable Windows executable. Run it directly — no dependencies, no install wizard, nothing to configure.</p>
           </details>
           <details>
             <summary>Which Windows versions are supported?</summary>
-            <p>Windows 10 and Windows 11. The app is optimized for modern Windows. There are no macOS or Linux builds yet.</p>
+            <p>Windows 10 and Windows 11 (64-bit). There are currently no macOS or Linux builds.</p>
           </details>
           <details>
             <summary>Can I change the hotkey?</summary>
-            <p>Yes. Open the settings window and record any key or chord. You can also choose between hold-to-talk and toggle mode.</p>
+            <p>Yes. Open the settings window from the tray icon and record any key or chord. You can also switch between hold-to-talk and toggle mode.</p>
           </details>
           <details>
             <summary>Does it work in every app?</summary>
-            <p>It works in virtually any app that accepts text input (VS Code, Slack, Notepad++, Chrome, Firefox, Outlook, and more). If an app runs as Administrator, you will need to run Extnded Thotz as Administrator too due to Windows UIPI restrictions.</p>
-          </details>
-          <details>
-            <summary>Is there a paid version?</summary>
-            <p>No. Extnded Thotz is completely free.</p>
-          </details>
-          <details>
-            <summary>Can I try the app?</summary>
-            <p>Yes. You can use the free app as long as you want.</p>
+            <p>It works in virtually any app that accepts text input — VS Code, Slack, Notepad++, Chrome, Firefox, Outlook, and more. If an app runs as Administrator, you will need to run Extnded Thotz as Administrator too (a Windows UIPI restriction), otherwise the paste is blocked.</p>
           </details>
           <details>
             <summary>How big is the download?</summary>
-            <p>The executable is about 22 MB. On first run, it may download the Whisper base model once, around 145 MB.</p>
+            <p>The executable is about 22 MB. On first run it may download the Whisper base model once, around 145 MB, so transcription works offline from then on.</p>
           </details>
           <details>
             <summary>Is my clipboard safe?</summary>
-            <p>Yes. Extnded Thotz automatically saves and restores your clipboard when inserting dictated text.</p>
+            <p>Yes. The app saves your clipboard before inserting dictated text and restores it immediately after, every time.</p>
           </details>
           <details>
-            <summary>Can I cancel mid-dictation?</summary>
-            <p>Yes. Press ESC at any time to cancel without inserting anything.</p>
+            <summary>Can I cancel mid-sentence?</summary>
+            <p>Yes. Press ESC while recording to cancel — nothing is transcribed, nothing is inserted.</p>
+          </details>
+          <details>
+            <summary>Why does Windows SmartScreen warn me?</summary>
+            <p>The build is not code-signed yet, so Windows shows an "unknown publisher" notice on first run. Verify the SHA-256 checksum on the download page matches, then click through. This is normal for unsigned portable software.</p>
           </details>
         </div>
 
-        <div class="hero-actions" style="margin-top: 40px;">
+        <div class="hero-actions">
           <a class="button primary" href="/download">Download for Windows — free</a>
         </div>
       </section>
@@ -121,8 +125,8 @@
         <span class="footer-links">
           <a href="/">Home</a>
           <a href="/#features">Features</a>
-          <a href="/download">Download</a>
           <a href="/faq">FAQ</a>
+          <a href="/download">Download</a>
           <a href="mailto:hello@scoutgoat.com">Contact</a>
         </span>
       </div>

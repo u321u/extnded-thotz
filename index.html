@@ -6,9 +6,9 @@
     <title>Extnded Thotz — Free voice dictation for Windows</title>
     <meta
       name="description"
-      content="Free Windows voice dictation app. Global hotkey, local Whisper transcription, Matrix-style listening overlay. No cloud by default."
+      content="Free Windows voice dictation app. Hold a global hotkey, speak, and polished text lands at your cursor. Local Whisper transcription — your audio never leaves your machine."
     />
-    <meta name="theme-color" content="#0a0a0b" />
+    <meta name="theme-color" content="#0b0b0d" />
     <link rel="canonical" href="https://extnded-thotz.vercel.app/" />
 
     <meta property="og:site_name" content="Extnded Thotz" />
@@ -16,7 +16,7 @@
     <meta property="og:title" content="Extnded Thotz — Free voice dictation for Windows" />
     <meta
       property="og:description"
-      content="Free Windows voice dictation. Hold a hotkey, speak, get text. Local Whisper transcription, no cloud by default."
+      content="Free Windows voice dictation. Hold a hotkey, speak, get polished text instantly. Local Whisper, no cloud by default."
     />
     <meta property="og:url" content="https://extnded-thotz.vercel.app/" />
     <meta property="og:image" content="https://extnded-thotz.vercel.app/assets/og.png" />
@@ -25,13 +25,14 @@
     <meta name="twitter:title" content="Extnded Thotz — Free voice dictation for Windows" />
     <meta
       name="twitter:description"
-      content="Free voice dictation for Windows. No cloud by default. Hold Ctrl+Windows and get text instantly."
+      content="Free voice dictation for Windows. No cloud by default. Hold Ctrl+Windows and get polished text instantly."
     />
     <meta name="twitter:image" content="https://extnded-thotz.vercel.app/assets/og.png" />
 
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32" />
-    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />    <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
     <script>
       document.documentElement.classList.remove("no-js");
@@ -52,7 +53,7 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Extnded Thotz",
-        "description": "Free Windows voice dictation app with a system-wide hotkey, local Whisper transcription, and a Matrix-style listening overlay.",
+        "description": "Free Windows voice dictation app with a system-wide hotkey and local Whisper transcription. Your audio never leaves your machine.",
         "operatingSystem": "Windows 10, Windows 11",
         "applicationCategory": "BusinessApplication",
         "url": "https://extnded-thotz.vercel.app/",
@@ -64,19 +65,18 @@
   </head>
   <body>
     <div class="grain" aria-hidden="true"></div>
-    <div class="bg-orbs" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="shell topbar">
       <a class="brand" href="/">
-        <img src="/assets/logo.png" alt="Extnded Thotz" width="28" height="28" />
+        <img src="/assets/logo.png" alt="Extnded Thotz" width="34" height="34" />
         <div>
           <span class="brand-house">Thotz by Scout Goat</span>
           <strong class="brand-name">Extnded Thotz</strong>
         </div>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="/">Home</a>
+        <a href="/" aria-current="page">Home</a>
         <a href="/#features">Features</a>
         <a href="/faq">FAQ</a>
         <a class="nav-cta" href="/download">Download for Windows</a>
@@ -90,19 +90,24 @@
             <span class="status-dot" aria-hidden="true"></span>
             Free · Local · Offline by default
           </p>
-          <h1>Free voice dictation for Windows.<br>No cloud. No subscription.</h1>
+          <h1>
+            Think out loud.<br />
+            <span class="serif">type nothing.</span>
+          </h1>
           <p class="lede">
-            Extnded Thotz is a free Windows dictation app. Hold a hotkey, speak, release, and your dictated text appears at the cursor. Transcription is local by default and your audio never leaves your machine.
+            Extnded Thotz turns your voice into clean, punctuated text in any Windows app.
+            Hold the hotkey, speak, release — done. Transcription runs locally with Whisper,
+            so your audio never leaves your machine.
           </p>
           <div class="hero-actions">
             <a class="button primary" href="/download">Download for Windows — free</a>
             <a class="button secondary" href="#features">See what it does</a>
           </div>
           <ul class="hero-points">
-            <li>Free to download and use</li>
-            <li>Local Whisper transcription</li>
-            <li>Works in any Windows app</li>
-            <li>No cloud by default</li>
+            <li>No sign-up</li>
+            <li>No subscription</li>
+            <li>Audio stays on your PC</li>
+            <li>Works in every app</li>
           </ul>
         </div>
 
@@ -120,68 +125,66 @@
               <p class="dim">&gt; hold ctrl + windows</p>
               <p class="dim">&gt; speak naturally</p>
               <p class="listen">
-                &gt; listening<span class="wave" aria-hidden="true"
-                  ><i></i><i></i><i></i><i></i><i></i><i></i></span
-                >
+                &gt; listening<span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
               </p>
-              <p class="gold">&gt; polished text lands at your cursor instantly</p>
+              <p class="gold">&gt; polished text lands at your cursor<span class="caret" aria-hidden="true"></span></p>
             </div>
           </div>
-          <div class="overlay-stage mini">
-            <div class="overlay-scan" aria-hidden="true"></div>
-            <div class="overlay-title">THOTZ BY SCOUT GOAT</div>
-            <div class="overlay-caption">LISTENING</div>
+          <div class="transcript-demo">
+            <p class="transcript-label">Before → after</p>
+            <p class="transcript-raw">um yeah so basically i think we should uh move the launch to friday if thats ok</p>
+            <p class="transcript-clean">Yeah — I think we should move the launch to Friday, if that's OK.</p>
           </div>
         </div>
       </section>
 
-      <section class="section shell" id="social-proof" data-reveal>
+      <section class="section shell" data-reveal>
         <div class="section-heading center">
           <p class="eyebrow">In plain English</p>
-          <h2>What makes it different</h2>
+          <h2>Dictation that respects your privacy</h2>
         </div>
         <ul class="plain-points">
-          <li>Free to download and run — no payment required.</li>
-          <li>Local Whisper transcription — audio never leaves your machine by default.</li>
-          <li>Global hotkey in any app — hold Ctrl + Windows, speak, release, text appears.</li>
+          <li>Free to download and run — no payment, no account, no catch.</li>
+          <li>Local Whisper transcription — your audio never leaves the machine.</li>
+          <li>Global hotkey in any app — hold <code>Ctrl+Windows</code>, speak, release, text appears.</li>
         </ul>
       </section>
 
-      <section class="section shell" id="features" data-reveal>
+      <section class="section shell" id="features">
         <div class="section-heading">
           <p class="eyebrow">Features</p>
-          <h2>A small set of things it actually does well</h2>
+          <h2>Everything you need, nothing you don't</h2>
         </div>
         <div class="feature-grid">
-          <article class="feature-card">
+          <article class="feature-card" data-reveal>
             <div class="feature-icon" aria-hidden="true"></div>
             <h3>Private by default</h3>
-            <p>Local Whisper transcription means your voice stays on your machine. No cloud APIs required unless you opt in.</p>
+            <p>Transcription runs on your machine with a local Whisper model. Nothing is uploaded, nothing is logged on a server.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" data-reveal>
             <div class="feature-icon" aria-hidden="true"></div>
-            <h3>Fast in practice</h3>
-            <p>Hold, speak, release. Cleaned text appears instantly at your cursor so you never break your flow.</p>
+            <h3>Clean, punctuated text</h3>
+            <p>Filler words are trimmed and punctuation is applied automatically, so what lands at your cursor reads like you typed it.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" data-reveal>
             <div class="feature-icon" aria-hidden="true"></div>
             <h3>Global hotkey</h3>
-            <p>Customizable <code>Ctrl+Windows</code> (or your choice). Hold-to-talk or toggle mode to fit your workflow.</p>
+            <p><code>Ctrl+Windows</code> out of the box — or record your own. Hold-to-talk or toggle mode, whichever fits your workflow.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" data-reveal>
             <div class="feature-icon" aria-hidden="true"></div>
-            <h3>Matrix-style overlay</h3>
-            <p>The Matrix-style overlay appears and reacts to your voice so you always know when it is listening. Transcription runs locally with Whisper.</p>
+            <h3>Voice-reactive overlay</h3>
+            <p>A subtle overlay reacts to your voice while it listens, so you always know exactly when you're being transcribed.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" data-reveal>
             <div class="feature-icon" aria-hidden="true"></div>
-            <h3>Clipboard restore</h3>
-            <p>Automatically saves and restores your clipboard. No lost content when pasting dictated text.</p>
+            <h3>Clipboard intact</h3>
+            <p>Your clipboard is saved before the paste and restored after. Copy something, dictate, and it's still there.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card" data-reveal>
             <div class="feature-icon" aria-hidden="true"></div>
-            <h3>Portable & easy</h3>
-            <p>Single Windows .exe — no Python, no install hassle. Download, run, and start dictating in seconds.</p>
+            <h3>Portable & instant</h3>
+            <p>A single ~22 MB executable. No installer, no Python, no wizard. Download, run, start dictating in seconds.</p>
           </article>
         </div>
       </section>
@@ -189,24 +192,24 @@
       <section class="section shell" id="how" data-reveal>
         <div class="section-heading center">
           <p class="eyebrow">How it works</p>
-          <h2>From thought to text in 3 seconds</h2>
+          <h2>From thought to text in three seconds</h2>
         </div>
         <div class="rite">
           <article class="rite-step">
             <span class="step-no">01</span>
             <h3>Hold the hotkey</h3>
-            <p>Press and hold <code>Ctrl + Windows</code> in any app — your IDE, browser, notes, email, or chat.</p>
+            <p>Press and hold <code>Ctrl+Windows</code> in any app — your editor, browser, notes, email, or chat.</p>
             <p class="keycap-row"><kbd>Ctrl</kbd><kbd>Windows</kbd></p>
           </article>
           <article class="rite-step">
             <span class="step-no">02</span>
             <h3>Speak naturally</h3>
-            <p>The Matrix overlay appears and reacts to your voice. Transcription runs locally with Whisper.</p>
+            <p>The overlay reacts to your voice while Whisper transcribes locally. Talk the way you'd talk to a person.</p>
           </article>
           <article class="rite-step">
             <span class="step-no">03</span>
             <h3>Release to insert</h3>
-            <p>Clean, punctuated text lands at your cursor. Filler words trimmed. Clipboard restored. Keep going.</p>
+            <p>Clean, punctuated text lands at your cursor. Fillers trimmed, clipboard restored, flow unbroken.</p>
           </article>
         </div>
       </section>
@@ -214,7 +217,7 @@
       <section class="section shell" id="comparison" data-reveal>
         <div class="section-heading">
           <p class="eyebrow">Why Extnded Thotz</p>
-          <h2>Better than built-in Windows Voice Typing</h2>
+          <h2>Difference from built-in Windows Voice Typing</h2>
         </div>
         <div class="compare-table-wrap">
           <table class="compare-table">
@@ -227,55 +230,54 @@
             </thead>
             <tbody>
               <tr>
-                <td>Local/offline by default</td>
-                <td>Mixed / cloud-assisted</td>
-                <td><span class="check">✓</span> Free local Whisper transcription</td>
+                <td>Offline transcription</td>
+                <td>Mostly cloud-assisted</td>
+                <td><span class="check">✓</span> Local Whisper, on your machine</td>
               </tr>
               <tr>
-                <td>Global hotkey anywhere</td>
-                <td>Win+H (limited UX)</td>
-                <td><span class="check">✓</span> Custom hotkey, hold-to-talk or toggle</td>
+                <td>Customizable hotkey</td>
+                <td>Fixed Win+H</td>
+                <td><span class="check">✓</span> Record any key or chord</td>
               </tr>
               <tr>
-                <td>Visual feedback</td>
-                <td>Minimal</td>
-                <td><span class="check">✓</span> Matrix-style mic-reactive overlay</td>
+                <td>Dictation modes</td>
+                <td>Push-to-talk only</td>
+                <td><span class="check">✓</span> Hold or toggle</td>
               </tr>
               <tr>
-                <td>Works in all apps</td>
-                <td>Generally yes, but clunky</td>
-                <td><span class="check">✓</span> Seamless with any Windows app</td>
+                <td>Text cleanup</td>
+                <td>Raw dictation</td>
+                <td><span class="check">✓</span> Filler trimming + punctuation</td>
               </tr>
               <tr>
                 <td>Clipboard preservation</td>
                 <td>No</td>
-                <td><span class="check">✓</span> Built-in restore</td>
+                <td><span class="check">✓</span> Saved and restored every time</td>
               </tr>
               <tr>
-                <td>Privacy-first</td>
-                <td>Less control</td>
-                <td><span class="check">✓</span> Audio never leaves your machine by default</td>
+                <td>Audio privacy</td>
+                <td>Sent to cloud services</td>
+                <td><span class="check">✓</span> Never leaves your machine</td>
               </tr>
               <tr>
                 <td>Price</td>
                 <td>Free (with OS)</td>
-                <td><span class="check">✓</span> Free to download · $29 optional Pro</td>
+                <td><span class="check">✓</span> Free to download and use</td>
               </tr>
             </tbody>
           </table>
         </div>
       </section>
 
-
       <section class="section shell faq-teaser" data-reveal>
         <div class="section-heading">
           <p class="eyebrow">Questions?</p>
-          <h2>Everything you need to know</h2>
+          <h2>Quick answers</h2>
         </div>
         <div class="faq-grid compact">
           <details>
             <summary>Does it send audio to the cloud?</summary>
-            <p>No. Transcription runs on your machine with local Whisper by default. Your audio never leaves your computer.</p>
+            <p>No. Transcription runs entirely on your machine with local Whisper. Your audio never leaves your computer.</p>
           </details>
           <details>
             <summary>Do I need Python installed?</summary>
@@ -283,20 +285,21 @@
           </details>
           <details>
             <summary>Does it work in all Windows apps?</summary>
-            <p>Yes. It works in virtually any app that accepts text input. If an app runs as admin, run Extnded Thotz as admin too due to Windows privilege restrictions.</p>
+            <p>Yes, virtually any app that accepts text input. If an app runs as Administrator, run Extnded Thotz as Administrator too (Windows UIPI restriction).</p>
           </details>
         </div>
         <div class="hero-actions">
-          <a class="button secondary" href="/faq">See full FAQ</a>
+          <a class="button secondary" href="/faq">Read the full FAQ</a>
         </div>
       </section>
 
       <section class="section final-cta shell" data-reveal>
-        <div class="cta-glow"></div>
-        <h2>Free Windows dictation. Pick it up now.</h2>
-        <p class="lede">Free Windows voice dictation. Hold Ctrl + Windows, speak, release. Pick up every time you would have typed.</p>
+        <div class="cta-glow" aria-hidden="true"></div>
+        <h2>Say it once. Have it everywhere.</h2>
+        <p class="lede">Free Windows voice dictation. Hold <code>Ctrl+Windows</code>, speak, release — polished text every time.</p>
         <div class="hero-actions">
           <a class="button primary large" href="/download">Download for Windows — free</a>
+          <a class="button secondary" href="/faq">Questions? Read the FAQ</a>
         </div>
       </section>
     </main>
