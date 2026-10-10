@@ -6,9 +6,9 @@
     <title>Extnded Thotz — Free voice dictation for Windows</title>
     <meta
       name="description"
-      content="Free Windows voice dictation app. Hold a global hotkey, speak, and polished text lands at your cursor. Local Whisper transcription — your audio never leaves your machine."
+      content="Free Windows voice dictation. Hold a global hotkey, speak, and clean, punctuated text lands at your cursor. Local Whisper transcription — your audio never leaves your machine."
     />
-    <meta name="theme-color" content="#0b0b0d" />
+    <meta name="theme-color" content="#09090b" />
     <link rel="canonical" href="https://extnded-thotz.vercel.app/" />
 
     <meta property="og:site_name" content="Extnded Thotz" />
@@ -64,16 +64,15 @@
     </script>
   </head>
   <body>
-    <div class="grain" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="shell topbar">
       <a class="brand" href="/">
-        <img src="/assets/logo.png" alt="Extnded Thotz" width="34" height="34" />
-        <div>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L18 12 L12 21 L6 12 Z"/></svg>
+        <span>
           <span class="brand-house">Thotz by Scout Goat</span>
           <strong class="brand-name">Extnded Thotz</strong>
-        </div>
+        </span>
       </a>
       <nav class="nav" aria-label="Primary">
         <a href="/" aria-current="page">Home</a>
@@ -84,14 +83,15 @@
     </header>
 
     <main id="main">
+      <!-- ═══════════ HERO ═══════════ -->
       <section class="hero shell" data-reveal>
-        <div class="hero-copy">
+        <div>
           <p class="hero-status">
             <span class="status-dot" aria-hidden="true"></span>
             Free · Local · Offline by default
           </p>
-          <h1>
-            Think out loud.<br />
+          <h1 class="display">
+            Speak your mind.<br />
             <span class="serif">type nothing.</span>
           </h1>
           <p class="lede">
@@ -100,28 +100,31 @@
             so your audio never leaves your machine.
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="/download">Download for Windows — free</a>
-            <a class="button secondary" href="#features">See what it does</a>
+            <a class="button primary" href="/download">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+              Download for Windows — free
+            </a>
+            <a class="button ghost" href="#features">See what it does</a>
           </div>
-          <ul class="hero-points">
-            <li>No sign-up</li>
-            <li>No subscription</li>
-            <li>Audio stays on your PC</li>
-            <li>Works in every app</li>
-          </ul>
+          <dl class="measures">
+            <div><dt>Free</dt><dd>forever, no account</dd></div>
+            <div><dt>0.3s</dt><dd>release to text</dd></div>
+            <div><dt>Local</dt><dd>whisper, on-device</dd></div>
+            <div><dt>~22 MB</dt><dd>portable exe</dd></div>
+          </dl>
         </div>
 
-        <div class="hero-demo">
-          <p class="keycap-row">
+        <div>
+          <p class="keycap-row" style="margin-bottom: 14px;">
             <kbd>Ctrl</kbd><kbd>Windows</kbd>
             <span>hold to talk · release to paste</span>
           </p>
-          <div class="terminal">
-            <div class="terminal-header">
+          <div class="panel">
+            <div class="panel-bar">
               <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
-              <span class="terminal-title">extnded_thotz — dictating</span>
+              <span class="panel-title">extnded_thotz — dictating</span>
             </div>
-            <div class="terminal-body">
+            <div class="panel-body">
               <p class="dim">&gt; hold ctrl + windows</p>
               <p class="dim">&gt; speak naturally</p>
               <p class="listen">
@@ -130,16 +133,22 @@
               <p class="gold">&gt; polished text lands at your cursor<span class="caret" aria-hidden="true"></span></p>
             </div>
           </div>
-          <div class="transcript-demo">
-            <p class="transcript-label">Before → after</p>
-            <p class="transcript-raw">um yeah so basically i think we should uh move the launch to friday if thats ok</p>
-            <p class="transcript-clean">Yeah — I think we should move the launch to Friday, if that's OK.</p>
+          <div class="grid502">
+            <div class="me">
+              <span class="me-label">you say</span>
+              <p class="me-say">um yeah so basically i think we should uh move the launch to friday if thats ok</p>
+            </div>
+            <div class="me">
+              <span class="me-label">it types</span>
+              <p class="me-get">Yeah — I think we should move the launch to Friday, if that's OK.</p>
+            </div>
           </div>
         </div>
       </section>
 
+      <!-- ═══════════ SPEAK IN THEIR WORDS ═══════════ -->
       <section class="section shell" data-reveal>
-        <div class="section-heading center">
+        <div class="section-head center">
           <p class="eyebrow">In plain English</p>
           <h2>Dictation that respects your privacy</h2>
         </div>
@@ -150,76 +159,95 @@
         </ul>
       </section>
 
-      <section class="section shell" id="features">
-        <div class="section-heading">
+      <!-- ═══════════ BENTO FEATURES ═══════════ -->
+      <section class="section shell" id="features" data-reveal>
+        <div class="section-head">
           <p class="eyebrow">Features</p>
-          <h2>Everything you need, nothing you don't</h2>
+          <h2>Everything you need, <span class="serif">nothing you don't</span></h2>
         </div>
-        <div class="feature-grid">
-          <article class="feature-card" data-reveal>
-            <div class="feature-icon" aria-hidden="true"></div>
+        <div class="bento-grid">
+          <article class="bento-card bx-brand">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3c-2.5 3-4.5 6.5-4.5 10a4.5 4.5 0 0 0 9 0c0-3.5-2-7-4.5-10Z"/></svg>
+            </div>
             <h3>Private by default</h3>
-            <p>Transcription runs on your machine with a local Whisper model. Nothing is uploaded, nothing is logged on a server.</p>
+            <p>Transcription runs on your machine with a local Whisper model. Nothing is uploaded, nothing is stored on a server.</p>
+            <span class="bento-metric"><strong>0 audio uploads</strong> — by design, not policy</span>
           </article>
-          <article class="feature-card" data-reveal>
-            <div class="feature-icon" aria-hidden="true"></div>
+
+          <article class="bento-card bx-mp3">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16v10a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V4Z"/><path d="m9 19-2 3m8-3 2 3"/><path d="M11.5 9.5v3m5-4.5-5 3-5-3v-3l5 3 5-3Z"/></svg>
+            </div>
             <h3>Clean, punctuated text</h3>
             <p>Filler words are trimmed and punctuation is applied automatically, so what lands at your cursor reads like you typed it.</p>
+            <div class="wave-strip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="bento-note">
+              <span>Fillers trimmed</span>
+              <span>Punctuation applied</span>
+            </div>
           </article>
-          <article class="feature-card" data-reveal>
-            <div class="feature-icon" aria-hidden="true"></div>
-            <h3>Global hotkey</h3>
-            <p><code>Ctrl+Windows</code> out of the box — or record your own. Hold-to-talk or toggle mode, whichever fits your workflow.</p>
+
+          <article class="bento-card bx-hotkey">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h.01M12 10h.01M16 10h.01M9 14h6"/></svg>
+            </div>
+            <h3>Your hotkey, your way</h3>
+            <p><code>Ctrl+Windows</code> out of the box — or record your own chord. Hold-to-talk or toggle mode.</p>
+            <p class="keycap-row"><kbd>Ctrl</kbd><kbd>Windows</kbd></p>
           </article>
-          <article class="feature-card" data-reveal>
-            <div class="feature-icon" aria-hidden="true"></div>
+
+          <article class="bento-card bx-clean">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 2c-3 3.6-5 7.6-5 10.5a5 5 0 0 0 10 0C17 9.6 15 5.6 12 2Z"/></svg>
+            </div>
             <h3>Voice-reactive overlay</h3>
             <p>A subtle overlay reacts to your voice while it listens, so you always know exactly when you're being transcribed.</p>
           </article>
-          <article class="feature-card" data-reveal>
-            <div class="feature-icon" aria-hidden="true"></div>
+
+          <article class="bento-card bx-overlay">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
             <h3>Clipboard intact</h3>
             <p>Your clipboard is saved before the paste and restored after. Copy something, dictate, and it's still there.</p>
-          </article>
-          <article class="feature-card" data-reveal>
-            <div class="feature-icon" aria-hidden="true"></div>
-            <h3>Portable & instant</h3>
-            <p>A single ~22 MB executable. No installer, no Python, no wizard. Download, run, start dictating in seconds.</p>
           </article>
         </div>
       </section>
 
+      <!-- ═══════════ HOW IT WORKS ═══════════ -->
       <section class="section shell" id="how" data-reveal>
-        <div class="section-heading center">
+        <div class="section-head center">
           <p class="eyebrow">How it works</p>
-          <h2>From thought to text in three seconds</h2>
+          <h2>From thought to text <span class="serif">in three seconds</span></h2>
         </div>
-        <div class="rite">
-          <article class="rite-step">
+        <ol class="how-rail">
+          <li class="how-step">
             <span class="step-no">01</span>
             <h3>Hold the hotkey</h3>
             <p>Press and hold <code>Ctrl+Windows</code> in any app — your editor, browser, notes, email, or chat.</p>
             <p class="keycap-row"><kbd>Ctrl</kbd><kbd>Windows</kbd></p>
-          </article>
-          <article class="rite-step">
+          </li>
+          <li class="how-step">
             <span class="step-no">02</span>
             <h3>Speak naturally</h3>
             <p>The overlay reacts to your voice while Whisper transcribes locally. Talk the way you'd talk to a person.</p>
-          </article>
-          <article class="rite-step">
+          </li>
+          <li class="how-step">
             <span class="step-no">03</span>
             <h3>Release to insert</h3>
             <p>Clean, punctuated text lands at your cursor. Fillers trimmed, clipboard restored, flow unbroken.</p>
-          </article>
-        </div>
+          </li>
+        </ol>
       </section>
 
+      <!-- ═══════════ WHY BETTER ═══════════ -->
       <section class="section shell" id="comparison" data-reveal>
-        <div class="section-heading">
+        <div class="section-head">
           <p class="eyebrow">Why Extnded Thotz</p>
           <h2>Difference from built-in Windows Voice Typing</h2>
         </div>
-        <div class="compare-table-wrap">
+        <div class="compare-outer">
           <table class="compare-table">
             <thead>
               <tr>
@@ -269,12 +297,13 @@
         </div>
       </section>
 
+      <!-- ═══════════ FAQ TEASER ═══════════ -->
       <section class="section shell faq-teaser" data-reveal>
-        <div class="section-heading">
+        <div class="section-head">
           <p class="eyebrow">Questions?</p>
           <h2>Quick answers</h2>
         </div>
-        <div class="faq-grid compact">
+        <div class="faq-grid">
           <details>
             <summary>Does it send audio to the cloud?</summary>
             <p>No. Transcription runs entirely on your machine with local Whisper. Your audio never leaves your computer.</p>
@@ -289,24 +318,37 @@
           </details>
         </div>
         <div class="hero-actions">
-          <a class="button secondary" href="/faq">Read the full FAQ</a>
+          <a class="button ghost" href="/faq">Read the full FAQ</a>
         </div>
       </section>
 
+      <!-- ═══════════ FINAL CTA ═══════════ -->
       <section class="section final-cta shell" data-reveal>
         <div class="cta-glow" aria-hidden="true"></div>
-        <h2>Say it once. Have it everywhere.</h2>
-        <p class="lede">Free Windows voice dictation. Hold <code>Ctrl+Windows</code>, speak, release — polished text every time.</p>
+        <p class="eyebrow" style="justify-content: center;">Pick it up now — it's free</p>
+        <h2>Say it once. <span class="serif">Have it everywhere.</span></h2>
+        <p class="lede">Hold <code>Ctrl+Windows</code>, speak, release — polished text every time.</p>
         <div class="hero-actions">
-          <a class="button primary large" href="/download">Download for Windows — free</a>
-          <a class="button secondary" href="/faq">Questions? Read the FAQ</a>
+          <a class="button primary large" href="/download">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Download for Windows — free
+          </a>
+          <a class="button ghost" href="/faq">Questions? Read the FAQ</a>
         </div>
+        <dl class="measures">
+          <div><dt>Free</dt><dd>no account, no upsell</dd></div>
+          <div><dt>Local</dt><dd>audio never uploaded</dd></div>
+          <div><dt>Portable</dt><dd>~22 MB, no installer</dd></div>
+        </dl>
       </section>
     </main>
 
     <footer class="footer">
       <div class="shell footer-inner">
-        <span>© 2026 Extnded Thotz — voice dictation by Scout Goat</span>
+        <span class="foot-brand">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 L18 12 L12 21 L6 12 Z"/></svg>
+          <span>© 2026 Extnded Thotz — voice dictation by Scout Goat</span>
+        </span>
         <span class="footer-links">
           <a href="/">Home</a>
           <a href="/#features">Features</a>
