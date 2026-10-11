@@ -1182,6 +1182,83 @@ details p a { color: var(--phos-bright); }
   .nav { gap: 14px 18px; flex-wrap: wrap; }
 }
 
+/* ---------- luxury flavor: gold leaf ---------- */
+.gold-text {
+  background: linear-gradient(100deg, var(--brass-2) 20%, #fff3d9 42%, var(--brass) 78%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+}
+
+.eyebrow {
+  position: relative;
+}
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 26px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--brass));
+  margin-right: 12px;
+  box-shadow: 0 0 6px rgba(217, 183, 120, 0.5);
+}
+.eyebrow::after {
+  background: linear-gradient(90deg, var(--brass), transparent);
+  margin-right: 0; margin-left: 12px;
+}
+
+.section-head.center .eyebrow::before { display: inline-block; }
+.section-head.center .eyebrow { justify-content: center; }
+
+/* cinematic brand poster */
+.showcase {
+  padding: 26px 0 18px;
+  position: relative;
+  z-index: 2;
+}
+.showcase-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(217, 183, 120, 0.28);
+  background: #020604;
+}
+.showcase-frame::before {
+  content: "";
+  position: absolute; inset: 10px;
+  border: 1px solid rgba(217, 183, 120, 0.18);
+  pointer-events: none;
+  z-index: 3;
+}
+.showcase-frame img {
+  width: 100%; height: auto;
+  display: block;
+  filter: saturate(1.03) contrast(1.04);
+}
+.showcase-vignette {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(1, 4, 2, 0.55) 100%),
+    linear-gradient(180deg, rgba(1, 4, 2, 0.25) 0%, transparent 18%, transparent 72%, rgba(1, 4, 2, 0.55) 100%);
+}
+.showcase-caption {
+  position: absolute; left: 22px; right: 22px; bottom: 16px;
+  display: flex; justify-content: space-between; gap: 16px;
+  font-family: var(--mono);
+  font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(233, 245, 238, 0.5);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+.showcase-caption-right { color: var(--brass); }
+
+@media (max-width: 720px) {
+  .showcase-frame::before { inset: 6px; }
+  .showcase-caption { font-size: 0.55rem; left: 16px; right: 16px; }
+}
+
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
