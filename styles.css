@@ -1212,7 +1212,11 @@ details p a { color: var(--phos-bright); }
 .section-head.center .eyebrow::before { display: inline-block; }
 .section-head.center .eyebrow { justify-content: center; }
 
-/* atmospheric hero art — a faded backdrop, not a poster */
+/* atmospheric art — faded backdrop behind the pull-quote band */
+.pull-quote.quote-art {
+  position: relative;
+  overflow: hidden;
+}
 .hero-art {
   position: absolute;
   inset: 0;
@@ -1222,26 +1226,29 @@ details p a { color: var(--phos-bright); }
 }
 .hero-art img {
   position: absolute;
-  top: 0; right: 0;
-  width: min(62vw, 760px);
-  height: 100%;
-  object-fit: cover;
-  object-position: top right;
-  opacity: 0.5;
-  filter: saturate(1.05) brightness(1.02);
+  top: 50%; left: 50%;
+  width: min(58vw, 680px);
+  height: auto;
+  transform: translate(-50%, -46%);
+  opacity: 0.28;
+  filter: saturate(1.05) brightness(1.0);
 }
 .hero-art::after {
   content: "";
   position: absolute; inset: 0;
   background:
-    radial-gradient(80% 60% at 50% 30%, transparent 40%, rgba(2, 6, 4, 0.72) 78%, var(--bg) 100%),
-    linear-gradient(90deg, var(--bg) 0%, transparent 42%),
-    linear-gradient(180deg, transparent 55%, var(--bg) 96%),
-    linear-gradient(0deg, transparent 55%, var(--bg) 96%);
+    radial-gradient(70% 70% at 50% 50%, transparent 30%, rgba(2, 6, 4, 0.68) 72%, var(--bg) 100%),
+    linear-gradient(180deg, var(--bg) 0%, transparent 30%, transparent 70%, var(--bg) 100%),
+    linear-gradient(90deg, var(--bg) 0%, transparent 28%, transparent 72%, var(--bg) 100%);
+}
+.pull-quote.quote-art blockquote,
+.pull-quote.quote-art i.qr-line {
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 900px) {
-  .hero-art img { opacity: 0.34; width: 100vw; object-position: center top; }
+  .hero-art img { opacity: 0.22; width: 96vw; }
 }
 
 /* ---------- reduced motion ---------- */
