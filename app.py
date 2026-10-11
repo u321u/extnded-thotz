@@ -29,11 +29,6 @@ def faq_page():
     return _send(BASE_DIR / "faq.html")
 
 
-@app.get("/pricing")
-def pricing_page():
-    return _send(BASE_DIR / "pricing.html")
-
-
 @app.get("/styles.css")
 def styles():
     return _send(BASE_DIR / "styles.css")
