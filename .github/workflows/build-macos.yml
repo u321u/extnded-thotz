@@ -39,8 +39,21 @@ jobs:
           sleep 8
           pkill -f "ExtndedThotz --smoke" || true
 
+      - name: Ad-hoc sign (avoid 'Apple could not verify' hard-block)
+        run: |
+          # Deep ad-hoc signature: every Mach-O in the bundle gets a identity-
+          # free code signature. macOS still Gatekeeper-warns on first open,
+          # but the block is now bypassable via right-click → Open and
+          # System Settings → Privacy & Security → "Open Anyway",
+          # instead of the unrepairable 'Apple could not verify' message.
+          codesign --force --deep --sign - --options runtime \
+            --entitlements Entitlements.plist dist/ExtndedThotz.app
+          codesign --verify --deep --strict dist/ExtndedThotz.app && echo "signature valid"
+
       - name: Package zip
         run: |
+          # Remove the com.apple.quarantine flag that only exists locally;
+          # users' Macs will add their own when they unzip.
           cd dist
           zip -qry ExtndedThotz-macOS.zip ExtndedThotz.app
           shasum -a 256 ExtndedThotz-macOS.zip

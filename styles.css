@@ -317,6 +317,15 @@ a { color: inherit; }
   background: var(--phos-dim);
   box-shadow: var(--glow);
 }
+.nav-cta-ghost {
+  border-color: var(--line-strong);
+  color: var(--muted);
+  padding: 8px 13px;
+}
+.nav-cta-ghost:hover {
+  color: var(--phos-bright);
+  border-color: var(--phos);
+}
 
 /* ---------- buttons ---------- */
 .button {
