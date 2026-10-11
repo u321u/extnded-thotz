@@ -47,13 +47,13 @@
           { "@type": "Question", "name": "Is Extnded Thotz really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is completely free to download and use — no account, no license key, no upsell, no feature paywall." } },
           { "@type": "Question", "name": "Does it send my audio to the cloud?", "acceptedAnswer": { "@type": "Answer", "text": "No. By default, transcription runs entirely on your machine using a local Whisper model. Your audio never leaves your computer." } },
           { "@type": "Question", "name": "Do I need Python installed?", "acceptedAnswer": { "@type": "Answer", "text": "No. The download is a portable Windows executable. Run it directly — no dependencies, no install wizard, nothing to configure." } },
-          { "@type": "Question", "name": "Which Windows versions are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Windows 10 and Windows 11 (64-bit). There are currently no macOS or Linux builds." } },
+          { "@type": "Question", "name": "Which platforms are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Windows 10 and Windows 11 (64-bit), plus macOS 12 and later via a universal build (Intel and Apple Silicon). Both are on the download page." } },
           { "@type": "Question", "name": "Can I change the hotkey?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Open the settings window from the tray icon and record any key or chord. You can also switch between hold-to-talk and toggle mode." } },
           { "@type": "Question", "name": "Does it work in every app?", "acceptedAnswer": { "@type": "Answer", "text": "It works in virtually any app that accepts text input. If an app runs as Administrator, you must run Extnded Thotz as Administrator too (a Windows UIPI restriction)." } },
-          { "@type": "Question", "name": "How big is the download?", "acceptedAnswer": { "@type": "Answer", "text": "The executable is about 22 MB. On first run it may download the Whisper base model once, around 145 MB, so transcription works offline from then on." } },
+          { "@type": "Question", "name": "How big is the download?", "acceptedAnswer": { "@type": "Answer", "text": "The Windows executable is about 22 MB and the macOS zip about 21 MB. On first run either may download the Whisper base model once, around 145 MB, so transcription works offline from then on." } },
           { "@type": "Question", "name": "Is my clipboard safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app saves your clipboard before inserting dictated text and restores it immediately after, every time." } },
           { "@type": "Question", "name": "Can I cancel mid-sentence?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Press ESC while recording to cancel — nothing is transcribed, nothing is inserted." } },
-          { "@type": "Question", "name": "Is there a macOS version?", "acceptedAnswer": { "@type": "Answer", "text": "Not yet. Extnded Thotz is Windows-first; a macOS build is in the works — email hello@scoutgoat.com to be notified when it ships." } }
+          { "@type": "Question", "name": "Is there a macOS version?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A universal macOS build (Intel and Apple Silicon) is on the download page. It is ad-hoc signed, so the first launch may require one approval in System Settings → Privacy & Security → Open Anyway." } }
         ]
       }
     </script>
@@ -75,7 +75,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="/">Home</a>
         <a href="/#features">Features</a>
-        <a href="/download">Download</a>
+        <a href="/pricing">Pricing</a>
         <a class="nav-cta" aria-current="page" href="/faq">FAQ</a>
       </nav>
     </header>
@@ -109,8 +109,12 @@
             <p>Yes — <a href="https://github.com/u321u/extnded-thotz/releases/download/v1.0.2-mac/ExtndedThotz-macOS.zip" download>download it here</a>. It is a universal build (Intel and Apple Silicon), ad-hoc signed so it can be opened. Recent macOS may warn "Apple could not verify" on the first double-click: click Done, then open <strong>System Settings → Privacy &amp; Security</strong> and press <strong>"Open Anyway"</strong>. This one-time approval is needed because the build isn't notarized with a paid Apple certificate.</p>
           </details>
           <details>
-            <summary>Which Windows versions are supported?</summary>
-            <p>Windows 10 and Windows 11 (64-bit). macOS 12 and later are supported by the universal build linked in the platform cards.</p>
+            <summary>Why is it free?</summary>
+            <p>Because a fast, private dictation tool shouldn't cost anything to try. If you want to support development, there's an optional supporter tier on the <a href="/pricing">pricing page</a> — it unlocks nothing, it just keeps the project alive.</p>
+          </details>
+          <details>
+            <summary>Which platforms are supported?</summary>
+            <p>Windows 10 and 11 (64-bit), plus macOS 12 and later via a universal build (Intel and Apple Silicon). Both download cards are on the <a href="/download">download page</a>.</p>
           </details>
           <details>
             <summary>Can I change the hotkey?</summary>
@@ -155,6 +159,7 @@
           <a href="/#features">Features</a>
           <a href="/faq">FAQ</a>
           <a href="/download">Download</a>
+          <a href="/pricing">Pricing</a>
           <a href="mailto:hello@scoutgoat.com">Contact</a>
         </span>
       </div>

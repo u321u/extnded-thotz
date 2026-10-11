@@ -1182,6 +1182,85 @@ details p a { color: var(--phos-bright); }
   .nav { gap: 14px 18px; flex-wrap: wrap; }
 }
 
+/* ---------- pricing ---------- */
+.pricing-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+  max-width: 860px;
+  margin: 0 auto;
+}
+@media (min-width: 860px) {
+  .pricing-grid { grid-template-columns: 1fr 1.15fr; align-items: stretch; }
+}
+
+.pricing-card {
+  position: relative;
+  display: flex; flex-direction: column;
+  padding: 30px 28px 26px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.pricing-card.featured {
+  border-color: rgba(217, 183, 120, 0.45);
+  background: linear-gradient(160deg, rgba(217, 183, 120, 0.06), var(--panel) 55%);
+  box-shadow: 0 0 40px rgba(217, 183, 120, 0.07);
+}
+.tier-flag {
+  position: absolute; top: -13px; left: 26px;
+  padding: 4px 12px;
+  border: 1px solid rgba(217, 183, 120, 0.5);
+  border-radius: 999px;
+  background: #05130b;
+  font-family: var(--mono);
+  font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--brass-2);
+}
+.tier-label {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted);
+}
+.tier-price {
+  margin: 10px 0 4px;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: -0.03em;
+}
+.tier-price sup { font-size: 0.42em; vertical-align: super; color: var(--muted); font-weight: 500; }
+.tier-price .tier-per {
+  font-size: 0.32em; font-weight: 500; color: var(--muted); letter-spacing: 0.06em;
+}
+.tier-tagline { margin: 6px 0 18px; color: var(--ink); }
+.tier-list {
+  margin: 0 0 22px; padding: 0;
+  list-style: none;
+  display: grid; gap: 10px;
+  font-size: 0.96rem; color: var(--ink);
+}
+.tier-list li { padding-left: 22px; position: relative; }
+.tier-list li::before {
+  content: "";
+  position: absolute; left: 0; top: 0.5em;
+  width: 7px; height: 7px;
+  border: 1px solid rgba(53, 224, 122, 0.55);
+  background: var(--phos-dim);
+  box-shadow: 0 0 8px rgba(53, 224, 122, 0.25);
+}
+.gold-list li::before {
+  border-color: rgba(217, 183, 120, 0.55);
+  background: var(--brass-dim);
+  box-shadow: 0 0 8px rgba(217, 183, 120, 0.3);
+}
+.pricing-card .hero-actions { margin-top: auto; }
+
 /* ---------- luxury flavor: gold leaf ---------- */
 .gold-text {
   background: linear-gradient(100deg, var(--brass-2) 20%, #fff3d9 42%, var(--brass) 78%);
