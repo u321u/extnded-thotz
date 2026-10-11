@@ -1,6 +1,8 @@
 """Settings window. Runs as its own process so the tray app's Tk loop and
 this window never share a thread: python -m extnded_thotz.settings_ui"""
 
+import sys
+
 import tkinter as tk
 from tkinter import messagebox, ttk
 
@@ -32,10 +34,10 @@ TK_KEY_NAMES = {
     "Shift_R": "right shift",
     "Alt_L": "left alt",
     "Alt_R": "right alt",
-    "Meta_L": "left windows",
-    "Meta_R": "right windows",
-    "Win_L": "left windows",
-    "Win_R": "right windows",
+    "Meta_L": "left cmd" if sys.platform == "darwin" else "left windows",
+    "Meta_R": "right cmd" if sys.platform == "darwin" else "right windows",
+    "Win_L": "left cmd" if sys.platform == "darwin" else "left windows",
+    "Win_R": "right cmd" if sys.platform == "darwin" else "right windows",
     "space": "space",
     "Return": "enter",
     "Escape": "esc",

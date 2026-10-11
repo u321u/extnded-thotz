@@ -2,12 +2,14 @@
 
 import json
 import os
+import sys
 from pathlib import Path
 
 APP_NAME = "ExtndedThotz"
 
 DEFAULTS = {
-    "hotkey": "ctrl+windows",   # key chord held (or toggled) to dictate
+    "hotkey": "ctrl+windows" if sys.platform != "darwin" else "ctrl+cmd",
+    # key chord held (or toggled) to dictate
     "mode": "hold",             # hold | toggle
     "backend": "auto",          # auto (openai if key, else local) | local | openai
     "model_size": "base",       # faster-whisper: tiny|base|small|medium|large-v3
@@ -28,9 +30,15 @@ DEFAULTS = {
 
 
 def config_dir() -> Path:
-    root = os.environ.get("APPDATA") or str(Path.home())
     profile = os.environ.get("EXTNDED_THOTZ_PROFILE", "").strip()
     folder = f"{APP_NAME}-{profile}" if profile else APP_NAME
+    appdata = os.environ.get("APPDATA")
+    if appdata:
+        root = appdata
+    elif sys.platform == "darwin":
+        root = str(Path.home() / "Library" / "Application Support")
+    else:
+        root = str(Path.home())
     return Path(root) / folder
 
 

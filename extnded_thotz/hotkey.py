@@ -22,6 +22,7 @@ MODIFIERS = {
     "shift", "left shift", "right shift",
     "alt", "left alt", "right alt",
     "windows", "left windows", "right windows",
+    "cmd", "left cmd", "right cmd", "option", "left option", "right option",
 }
 
 
@@ -56,7 +57,7 @@ def shortcut_parts(shortcut: str) -> tuple[str, ...]:
 def _part_is_pressed(part: str, pressed: set[str]) -> bool:
     if part in pressed:
         return True
-    if part in {"ctrl", "shift", "alt", "windows"}:
+    if part in {"ctrl", "shift", "alt", "windows", "cmd", "option"}:
         return any(key == part or key.endswith(f" {part}") for key in pressed)
     return False
 
