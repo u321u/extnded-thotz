@@ -1,0 +1,61 @@
+name: Build macOS app
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "extnded_thotz/**"
+      - "ExtndedThotz-mac.spec"
+      - ".github/workflows/build-macos.yml"
+      - "requirements.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pyinstaller
+
+      - name: Build ExtndedThotz.app
+        run: python -m PyInstaller --noconfirm --clean ExtndedThotz-mac.spec
+
+      - name: Smoke test (binary starts)
+        run: |
+          ./dist/ExtndedThotz.app/Contents/MacOS/ExtndedThotz --smoke 2 &
+          sleep 8
+          pkill -f "ExtndedThotz --smoke" || true
+
+      - name: Package zip
+        run: |
+          cd dist
+          zip -qry ExtndedThotz-macOS.zip ExtndedThotz.app
+          shasum -a 256 ExtndedThotz-macOS.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ExtndedThotz-macOS
+          path: dist/ExtndedThotz-macOS.zip
+          retention-days: 30
+
+      - name: Attach to release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          files: dist/ExtndedThotz-macOS.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

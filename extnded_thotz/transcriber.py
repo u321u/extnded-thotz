@@ -4,7 +4,13 @@ import io
 import sys
 import threading
 
-from .audio_io import TARGET_RATE, float32_to_wav_bytes, load_wav_float32, resample_linear
+from .audio_io import (
+    TARGET_RATE,
+    float32_to_wav_bytes,
+    is_unusable,
+    load_wav_float32,
+    resample_linear,
+)
 
 
 class TranscriptionError(RuntimeError):
@@ -37,12 +43,29 @@ class LocalWhisperBackend:
     def transcribe(self, audio, language=None) -> str:
         if audio.size < TARGET_RATE // 10:  # under 0.1 s of audio
             return ""
+        if is_unusable(audio):
+            # Muted/dead/corrupt input: Whisper confidently invents filler
+            # ("You") on digital silence — never hand it such audio.
+            return ""
         self.load()
         try:
             segments, _info = self._model.transcribe(
-                audio, language=language, beam_size=5, vad_filter=self._use_vad
+                audio, language=language, beam_size=5, vad_filter=self._use_vad,
+                # Conditioning on prior text lets a filler hallucination ("You")
+                # self-reinforce across segments — off for push-to-talk clips.
+                condition_on_previous_text=False,
             )
-            return " ".join(seg.text.strip() for seg in segments).strip()
+            # Hallucination guard: on quiet/dead input Whisper confidently
+            # invents filler ("You", "Thanks for watching…"). Discard rule
+            # from OpenAI's reference pipeline: drop a segment only when
+            # no_speech_prob > 0.6 AND avg_logprob < -1.0. If everything is
+            # dropped the result is "" and the app reports "nothing heard".
+            parts = (
+                seg.text.strip()
+                for seg in segments
+                if not (seg.no_speech_prob > 0.6 and seg.avg_logprob < -1.0)
+            )
+            return " ".join(part for part in parts if part).strip()
         except Exception as exc:
             raise TranscriptionError(str(exc)) from exc
 
@@ -63,6 +86,8 @@ class OpenAIBackend:
         return self
 
     def transcribe(self, audio, language=None) -> str:
+        if is_unusable(audio):
+            return ""
         self.load()
         buf = io.BytesIO(float32_to_wav_bytes(audio))
         buf.name = "dictation.wav"

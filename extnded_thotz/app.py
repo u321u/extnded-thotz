@@ -9,6 +9,7 @@ import time
 
 from . import config as config_mod
 from . import llm_cleanup
+from .audio_io import is_silent, is_unusable
 from .cleanup import clean_transcript
 from .history import History
 from .hotkey import HotkeyController, KeyboardBinder
@@ -35,6 +36,7 @@ class DictationApp:
         self._started_at = 0.0
         self._last_cfg_mtime = None
         self.recorder = Recorder()
+        self.recorder.prefer_by_name(cfg.get("input_device", ""))
         self.api_key = config_mod.resolve_api_key(cfg)
         self.backend = make_backend(cfg, self.api_key)
         self.history = History(config_mod.config_dir() / "history.jsonl")
@@ -62,6 +64,9 @@ class DictationApp:
         self.binder.bind()
         if self.cfg.get("preload_model") and self.backend.name == "local":
             threading.Thread(target=self._preload, daemon=True, name="model-preload").start()
+        # Find a mic that actually carries signal before the first dictation —
+        # the Windows default can be muted/dead yet still open without error.
+        self.recorder.schedule_probe()
         threading.Thread(target=self._watch_config, daemon=True, name="config-watch").start()
         log.info(
             "Extnded Thotz ready — %s '%s' to dictate (backend=%s, model=%s)",
@@ -112,6 +117,17 @@ class DictationApp:
         self._set_tray_recording(False)
         if audio.size < MIN_AUDIO_SECONDS * 16000:
             self.ui(lambda: self.overlay.flash("· too short"))
+            return
+        if is_unusable(audio):
+            # Feeding silence/garbage to Whisper yields hallucinations ("You").
+            silent = is_silent(audio)
+            log.warning(
+                "Capture unusable (%s) — skipping transcription",
+                "silent" if silent else "corrupt",
+            )
+            message = "· mic silent — check mic" if silent else "· bad mic signal"
+            self.ui(lambda: self.overlay.flash(message))
+            self.recorder.schedule_probe()
             return
         self.busy = True
         if self.cfg.get("show_overlay", True):
@@ -219,5 +235,7 @@ class DictationApp:
         self.controller.mode = new["mode"]
         if new["hotkey"] != old["hotkey"]:
             self.binder.rebind(new["hotkey"])
+        if new.get("input_device", "") != old.get("input_device", ""):
+            self.recorder.prefer_by_name(new.get("input_device", ""))
         log.info("Config reloaded (hotkey=%s, mode=%s, backend=%s)",
                  new["hotkey"], new["mode"], self.backend.name)

@@ -140,17 +140,115 @@ class HotkeyController:
 
 
 class KeyboardBinder:
+    """Global hotkey wiring, cross-platform.
+
+    Windows: the `keyboard` library with raw event names.
+    macOS: pynput's global listener with normalized virtual-key names
+    (no accessibility interception of every key — only modifiers the
+    user chose). ESC-cancel is wired through the same listener.
+    """
+
+    PYNPUT_MAP = {
+        "ctrl": {"ctrl_l", "ctrl_r", "ctrl"},
+        "left ctrl": {"ctrl_l"},
+        "right ctrl": {"ctrl_r"},
+        "alt": {"alt_l", "alt_r", "alt", "option_l", "option_r"},
+        "left alt": {"alt_l", "option_l"},
+        "right alt": {"alt_r", "option_r"},
+        "shift": {"shift_l", "shift_r", "shift"},
+        "left shift": {"shift_l"},
+        "right shift": {"shift_r"},
+        "cmd": {"cmd", "cmd_l", "cmd_r"},
+        "windows": {"cmd", "win_l", "win_r", "cmd_l", "cmd_r"},
+        "esc": {"esc"},
+        "enter": {"enter", "return"},
+        "space": {"space"},
+        "tab": {"tab"},
+    }
+
     def __init__(self, controller: HotkeyController, key: str = "right ctrl"):
         self.controller = controller
         self.key = normalize_shortcut(key)
         self._handles = []
         self._state = ShortcutState(self.key)
+        self._pynput_parts = self._to_pynput_parts(self.key)
+
+    @classmethod
+    def _to_pynput_parts(cls, shortcut: str) -> set[str] | None:
+        """Translate a shortcut into pynput key-name fragments, if possible."""
+        try:
+            parts = shortcut_parts(shortcut)
+        except ValueError:
+            return None
+        mapped = []
+        for part in parts:
+            names = cls.PYNPUT_MAP.get(part)
+            if names:
+                mapped.append(names)
+                continue
+            if len(part) == 1 and (part.isalnum() or part == " "):
+                mapped.append({part if part != " " else "space"})
+                continue
+            mapped.append({part})
+        return set().union(*mapped) if mapped else None
+
+    # -- Windows (keyboard library) -------------------------------------
 
     def bind(self) -> None:
+        import sys
+
+        if sys.platform == "darwin" and self._pynput_parts is not None:
+            self._bind_pynput()
+        else:
+            self._bind_keyboard()
+
+    def _bind_keyboard(self) -> None:
         import keyboard
 
         self._state = ShortcutState(self.key)
         self._handles = [keyboard.hook(self._on_event, suppress=False)]
+
+    def _bind_pynput(self) -> None:
+        from pynput import keyboard as pk
+
+        held: set[str] = set()
+        state = self._state = ShortcutState(self.key)
+
+        def on_press(key):
+            name = self._pynput_name(pk, key)
+            if name is None:
+                return
+            if name == "esc":
+                self.controller.cancel()
+                return
+            held.add(name)
+            transition = state.feed(name, "down")
+            if transition == "press":
+                self.controller.press()
+
+        def on_release(key):
+            name = self._pynput_name(pk, key)
+            if name is None:
+                return
+            held.discard(name)
+            for h in list(held):  # release any stale state cleanly
+                state.feed(h, "down")
+            transition = state.feed(name, "up")
+            if transition == "release":
+                self.controller.release()
+
+        listener = pk.GlobalListener(on_press, on_release)
+        listener.start()
+        self._handles = [listener]
+
+    @staticmethod
+    def _pynput_name(pk, key) -> str | None:
+        try:
+            if isinstance(key, pk.Key):  # modifiers / specials
+                return key.name
+            return getattr(key, "char", None) or (key.vk and pk.KeyCode.from_vk(key.vk).char) or None
+        except Exception:
+            return None
 
     def _on_event(self, event) -> None:
         if event.event_type == "down" and normalize_key_name(event.name) == "esc":
@@ -162,16 +260,20 @@ class KeyboardBinder:
             self.controller.release()
 
     def unbind(self) -> None:
-        import keyboard
-
         for handle in self._handles:
             try:
-                keyboard.unhook(handle)
-            except (KeyError, ValueError):
+                if hasattr(handle, "unhook"):
+                    import keyboard
+
+                    keyboard.unhook(handle)
+                elif hasattr(handle, "stop"):
+                    handle.stop()
+            except Exception:
                 pass
         self._handles = []
 
     def rebind(self, new_key: str) -> None:
         self.unbind()
         self.key = normalize_shortcut(new_key)
+        self._pynput_parts = self._to_pynput_parts(self.key)
         self.bind()

@@ -11,6 +11,7 @@ DEFAULTS = {
     "mode": "hold",             # hold | toggle
     "backend": "auto",          # auto (openai if key, else local) | local | openai
     "model_size": "base",       # faster-whisper: tiny|base|small|medium|large-v3
+    "input_device": "",         # mic name substring to pin; "" = auto (probe for signal)
     "language": None,           # None = auto-detect, else ISO code like "en"
     "llm_cleanup": "auto",      # auto (on when key present) | on | off
     "remove_fillers": True,

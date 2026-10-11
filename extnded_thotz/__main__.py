@@ -81,18 +81,29 @@ def main(argv=None) -> int:
     if guard is None:
         message = (
             f"{APP_DISPLAY_NAME} is already running.\n\n"
-            "Look for the goat icon in the system tray — it may be hidden "
-            "behind the ^ overflow arrow next to the clock."
+            "Look for the goat icon in the system tray / menu bar — it may "
+            "be hidden behind the overflow arrow near the clock."
         )
         print(message)
-        try:
-            # Windowed (pyinstaller --noconsole) builds have no stdout, so a
-            # silent exit here looks like "the app won't open" — show a dialog.
-            import ctypes
+        if sys.platform == "win32":
+            try:
+                # Windowed (pyinstaller --noconsole) builds have no stdout, so a
+                # silent exit here looks like "the app won't open" — show a dialog.
+                import ctypes
 
-            ctypes.windll.user32.MessageBoxW(None, message, APP_DISPLAY_NAME, 0x40)
-        except Exception:
-            pass
+                ctypes.windll.user32.MessageBoxW(None, message, APP_DISPLAY_NAME, 0x40)
+            except Exception:
+                pass
+        else:
+            try:
+                import tkinter as tk
+                from tkinter import messagebox
+
+                _root = tk.Tk(); _root.withdraw()
+                messagebox.showinfo(APP_DISPLAY_NAME, message, parent=_root)
+                _root.destroy()
+            except Exception:
+                pass
         return 1
 
     import tkinter as tk

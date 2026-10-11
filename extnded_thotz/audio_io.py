@@ -8,6 +8,37 @@ import numpy as np
 
 TARGET_RATE = 16000
 
+# Peak below -60 dBFS means no usable signal: a muted or dead microphone.
+# A real room always carries an ambient floor above this; speech sits far above.
+SILENCE_PEAK = 1e-3
+
+
+def is_silent(audio: np.ndarray) -> bool:
+    """True when a capture holds no usable signal (muted / blocked input)."""
+    if audio.size == 0:
+        return True
+    return float(np.max(np.abs(audio))) < SILENCE_PEAK
+
+
+# float32 audio stays near [-1.0, 1.0]. Pathologically large values are
+# corrupt driver buffers (seen on broken WDM-KS endpoints), not sound.
+GARBAGE_PEAK = 4.0
+
+
+def is_corrupt(audio: np.ndarray) -> bool:
+    """True when a capture holds garbage instead of audio."""
+    if audio.size == 0:
+        return False
+    peak = float(np.max(np.abs(audio)))
+    if not np.isfinite(peak):
+        return True  # NaN/inf from a broken driver buffer
+    return peak > GARBAGE_PEAK
+
+
+def is_unusable(audio: np.ndarray) -> bool:
+    """Silent (muted/dead mic) or corrupt (bad driver buffer) — never transcribe."""
+    return is_silent(audio) or is_corrupt(audio)
+
 
 def _float32_to_int16(audio: np.ndarray) -> np.ndarray:
     return (np.clip(audio, -1.0, 1.0) * 32767.0).astype(np.int16)

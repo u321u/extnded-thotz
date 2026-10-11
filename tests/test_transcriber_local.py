@@ -25,6 +25,24 @@ def test_empty_audio_returns_empty_string():
     assert backend.transcribe(np.zeros(100, dtype=np.float32)) == ""
 
 
+def test_silent_audio_never_hallucinates():
+    """Dead air used to come back as Whisper's filler 'You'."""
+    import numpy as np
+
+    backend = LocalWhisperBackend("tiny")
+    # long enough to pass the 0.1 s minimum, but below the silence gate:
+    # must return "" without loading the model
+    dead = np.full(TARGET_RATE * 2, 1e-5, dtype=np.float32)
+    assert backend.transcribe(dead) == ""
+    zeros = np.zeros(TARGET_RATE * 3, dtype=np.float32)
+    assert backend.transcribe(zeros) == ""
+    # corrupt driver buffer (broken WDM-KS endpoint) must never reach Whisper
+    corrupt = np.full(TARGET_RATE * 2, 1e30, dtype=np.float32)
+    assert backend.transcribe(corrupt) == ""
+    nanbuf = np.full(TARGET_RATE * 2, np.nan, dtype=np.float32)
+    assert backend.transcribe(nanbuf) == ""
+
+
 def test_make_backend_selection():
     assert make_backend({"backend": "auto", "model_size": "base"}, api_key="").name == "local"
     assert make_backend({"backend": "auto", "openai_stt_model": "whisper-1"}, api_key="sk-x").name == "openai"

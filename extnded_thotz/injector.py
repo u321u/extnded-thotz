@@ -29,6 +29,14 @@ def _set_clipboard(text: str) -> None:
     pyperclip.copy(text)
 
 
+import sys
+
+
+def _paste_chord() -> str:
+    """The platform paste chord, as accepted by `keyboard.send`/pyperclip flows."""
+    return "cmd+v" if sys.platform == "darwin" else "ctrl+v"
+
+
 def inject_text(
     text: str,
     method: str = "paste",
@@ -53,7 +61,7 @@ def inject_text(
             previous = None
     _set_clipboard(text)
     time.sleep(0.05)
-    kb.send("ctrl+v")
+    kb.send(_paste_chord())
     if restore_clipboard and previous is not None:
         def _restore(value=previous):
             try:

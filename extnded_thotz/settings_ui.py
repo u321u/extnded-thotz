@@ -12,6 +12,19 @@ FG = "#f2f2f2"
 
 MODEL_CHOICES = ["tiny", "base", "small", "medium", "large-v3"]
 
+
+def input_device_choices() -> list[str]:
+    """"auto" plus every input device name currently visible to Windows."""
+    try:
+        import sounddevice as sd
+
+        names = sorted(
+            {d["name"] for d in sd.query_devices() if d["max_input_channels"] > 0}
+        )
+        return ["auto"] + names
+    except Exception:
+        return ["auto"]
+
 TK_KEY_NAMES = {
     "Control_L": "left ctrl",
     "Control_R": "right ctrl",
@@ -40,6 +53,7 @@ def main() -> None:
     mode_var = tk.StringVar(value=cfg["mode"])
     backend_var = tk.StringVar(value=cfg["backend"])
     model_var = tk.StringVar(value=cfg["model_size"])
+    device_var = tk.StringVar(value=cfg.get("input_device") or "auto")
     language_var = tk.StringVar(value=cfg["language"] or "")
     llm_var = tk.StringVar(value=cfg["llm_cleanup"])
     injection_var = tk.StringVar(value=cfg["injection"])
@@ -157,6 +171,7 @@ def main() -> None:
     label("Key mode"); combo(mode_var, ["hold", "toggle"])
     label("Transcription backend"); combo(backend_var, ["auto", "local", "openai"])
     label("Local model size"); combo(model_var, MODEL_CHOICES)
+    label("Microphone"); combo(device_var, input_device_choices())
     label("Language (blank = auto)")
     entry = tk.Entry(body, textvariable=language_var, width=24, bg="#222222", fg=FG,
                      insertbackground=FG)
@@ -184,6 +199,7 @@ def main() -> None:
         cfg.update(
             hotkey=hotkey, mode=mode_var.get(), backend=backend_var.get(),
             model_size=model_var.get(), language=(language_var.get().strip() or None),
+            input_device=("" if device_var.get() == "auto" else device_var.get()),
             llm_cleanup=llm_var.get(), injection=injection_var.get(),
             openai_api_key=api_key_var.get().strip(),
             remove_fillers=fillers_var.get(), voice_commands=commands_var.get(),

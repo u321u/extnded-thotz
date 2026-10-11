@@ -6,7 +6,15 @@ import tkinter as tk
 
 
 def _animations_enabled() -> bool:
-    """Honor Windows' 'Show animations in Windows' accessibility setting."""
+    """Honor the OS 'reduce animations' accessibility preference.
+
+    Windows: SPI_GETCLIENTAREAANIMATION. macOS: NSWorkspace accessibility
+    'Reduce motion' is not exposed via stdlib, so default to enabled.
+    """
+    import sys
+
+    if sys.platform != "win32":
+        return True
     try:
         import ctypes
 
@@ -55,7 +63,7 @@ class Overlay:
         self._matrix_job = None
         self._level_provider = lambda: 0.0
         self._animate = _animations_enabled()
-        self._column_width = 14
+        self._column_width = 12
         self._drops = [
             random.uniform(-self.HEIGHT, self.HEIGHT)
             for _ in range(max(1, self.WIDTH // self._column_width))
@@ -118,39 +126,50 @@ class Overlay:
 
         self.canvas.delete("all")
         glyphs = "01THOTZSCOUTGOAT"
-        speed = 35 + level * 150
+        speed = 24 + level * 110
+        title_top = 16
+        title_bottom = 56
+        center_left = 82
+        center_right = 218
+
         for index, y in enumerate(self._drops):
             x = index * self._column_width + (self._column_width / 2)
             y += speed * elapsed * (0.65 + (index % 5) * 0.12)
-            if y > self.HEIGHT + 45:
-                y = random.uniform(-75, -15)
+            if y > self.HEIGHT + 18:
+                y = random.uniform(-42, 0)
             self._drops[index] = y
             for trail in range(4):
-                char_y = y - trail * 15
-                if -15 <= char_y <= self.HEIGHT + 15:
+                char_y = y - trail * 10
+                within_panel = title_top <= char_y <= title_bottom
+                around_title = not (24 <= char_y <= 48 and center_left <= x <= center_right)
+                if within_panel and around_title:
                     color = ("#b8ffd0", "#37e66d", "#128a3d", "#075523")[trail]
                     self.canvas.create_text(
                         x,
                         char_y,
                         text=random.choice(glyphs),
                         fill=color,
-                        font=("Consolas", 8, "bold"),
+                        font=("Consolas", 7, "bold"),
                     )
 
         glow = int(95 + level * 160)
         accent = f"#00{glow:02x}{min(255, 70 + glow // 2):02x}"
         self.canvas.create_rectangle(
-            32,
-            14,
-            self.WIDTH - 32,
-            58,
+            18,
+            12,
+            self.WIDTH - 18,
+            60,
             fill="#020804",
             outline=accent,
             width=1,
         )
+        self.canvas.create_line(18, 22, center_left, 22, fill="#083e1c")
+        self.canvas.create_line(center_right, 22, self.WIDTH - 18, 22, fill="#083e1c")
+        self.canvas.create_line(18, 50, center_left, 50, fill="#083e1c")
+        self.canvas.create_line(center_right, 50, self.WIDTH - 18, 50, fill="#083e1c")
         self.canvas.create_text(
             self.WIDTH / 2,
-            29,
+            31,
             text="THOTZ BY SCOUT GOAT",
             fill="#b8ffd0",
             font=("Consolas", 10, "bold"),
