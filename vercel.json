@@ -1,8 +1,16 @@
 {
   "cleanUrls": true,
   "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/downloads/ExtndedThotz.exe",
+      "destination": "https://github.com/u321u/extnded-thotz/releases/download/v1.0.3-win/ExtndedThotz.exe",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    { "source": "/downloads/:path*", "destination": "/public/downloads/:path*" }
+    { "source": "/downloads/:path*", "destination": "/public/downloads/:path*" },
+    { "source": "/security", "destination": "/security.md" }
   ],
   "headers": [
     {
@@ -10,8 +18,9 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+          "value": "default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'; font-src 'self' https://extnded-thotz.vercel.app; connect-src 'self'; media-src 'self'; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'; report-uri https://extnded-thotz.vercel.app/csp-report; report-to csp-endpoint"
         },
+        { "key": "Access-Control-Allow-Origin", "value": "https://extnded-thotz.vercel.app" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "DENY" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
@@ -19,7 +28,25 @@
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=()" },
         { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
         { "key": "Cross-Origin-Resource-Policy", "value": "same-origin" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        { "key": "Timing-Allow-Origin", "value": "https://extnded-thotz.vercel.app" },
+        { "key": "X-Permitted-Cross-Domain-Policies", "value": "none" }
+      ]
+    },
+    {
+      "source": "/fonts/:path*",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://extnded-thotz.vercel.app" },
+        { "key": "Timing-Allow-Origin", "value": "https://extnded-thotz.vercel.app" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/assets/:path*",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://extnded-thotz.vercel.app" },
+        { "key": "Timing-Allow-Origin", "value": "https://extnded-thotz.vercel.app" },
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
   ]

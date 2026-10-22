@@ -97,13 +97,18 @@ The implementation plan (architecture, module specs, roadmap) is in
 7. Settings: switch to F9 + toggle mode, Save → within 2 s, F9 tap starts/stops dictation.
 8. Tray → Quit → icon disappears, process exits, hotkey stops reacting.
 
-## Packaging (optional)
+## Packaging
 
 ```bash
 pip install pyinstaller
-pyinstaller --noconsole --name ExtndedThotz --icon assets/logo.png ^
-  --add-data "assets;assets" --collect-all faster_whisper -m extnded_thotz
+python -m PyInstaller --noconfirm --clean ExtndedThotz-win.spec   # one-file ExtndedThotz.exe
+python -m PyInstaller --noconfirm --clean ExtndedThotz.spec       # on-dir build, for debugging
 ```
+
+The one-file build is what ships. Pushing a `v*-win` tag runs
+`.github/workflows/build-windows.yml`, which runs the test suite, builds the
+executable, smoke-tests it from a clean folder, and attaches it plus
+`SHA256SUMS.txt` to the GitHub release.
 
 ## Known limitations
 

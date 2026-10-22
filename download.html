@@ -26,18 +26,6 @@
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
-    <script>
-      document.documentElement.classList.remove("no-js");
-      window.addEventListener("load", function () {
-        setTimeout(function () {
-          if (!window.__revealReady) {
-            document.querySelectorAll("[data-reveal]").forEach(function (el) {
-              el.classList.add("is-visible");
-            });
-          }
-        }, 600);
-      });
-    </script>
 
     
     <script defer src="/script.js"></script>
@@ -66,31 +54,30 @@
 
     <main id="main">
       <section class="section shell page-hero" data-reveal>
-        <p class="eyebrow">Windows · Free · ~22 MB</p>
+        <p class="eyebrow">Windows · Free · ~100 MB</p>
         <h1>Download Extnded Thotz</h1>
         <p class="lede">
           One portable executable. No installer, no Python, no account.
-          Transcription runs locally — your audio never leaves your machine.
+          Transcription runs locally — your audio never leaves the machine.
         </p>
 
         
 
-        <div class="download-card" data-reveal>
+        <div class="download-card hud" data-reveal>
           <div>
             <span class="price-tag">Free — everything included</span>
             <h3>Get Extnded Thotz</h3>
-            <p class="dl-meta">Windows 10 or 11 · Portable · ~22 MB · Nothing to pay</p>
+            <p class="dl-meta">Windows 10 or 11 · Portable · ~100 MB · Nothing to pay</p>
           </div>
           <div class="dl-actions">
             <a class="button primary large" href="/downloads/ExtndedThotz.exe" download>
               <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
               Download for Windows — free
             </a>
-            <a class="button ghost" href="/downloads/ExtndedThotz-windows.zip" download>Download .zip</a>
           </div>
           <ul class="dl-points">
             <li><strong>100% local transcription</strong> — private by default</li>
-            <li><strong>No installation</strong> — just run the executable</li>
+            <li><strong>No installation</strong> — run it</li>
             <li><strong>Global hotkey</strong> — works in any Windows app</li>
             <li><strong>Free forever</strong> — no license key, no upsell</li>
           </ul>
@@ -100,19 +87,18 @@
           <img src="/assets/logo.png" alt="" width="54" height="54" />
           <div>
             <strong>ExtndedThotz.exe</strong>
-            <p>One file. Yours in seconds.</p>
+            <p>One file. Free, in seconds.</p>
           </div>
         </div>
 
-        <div class="checksums" data-reveal>
+        <div class="checksums hud" data-reveal>
           <h4>SHA-256 checksums</h4>
-          <code><span class="file">ExtndedThotz.exe — </span>1ed8583482252a5cc7b54906275f41e0334a55aabf0daed700b962a92c655aa0</code>
-          <code><span class="file">ExtndedThotz-windows.zip — </span>01b12d12e8f824106e26e096869d925bf7c3935f6ef5103bb62fc2035ed9b4bd</code>
+          <code><span class="file">ExtndedThotz.exe — </span>389ba11e1bb7dec1fed768dff23fa8d83bbb7833d4210ca5263e6b7d55323436</code>
           <code><span class="file">ExtndedThotz-macOS.zip — </span>4e8a559fbed170763019da54cecaee8318475d9a8c7901cd0615717a14360bc3</code>
         </div>
 
         <div class="platform-strip">
-          <div class="platform-card available">
+          <div class="platform-card available hud">
             <div class="platform-head">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg>
               Windows 10 · 11
@@ -121,8 +107,7 @@
             <p>The executable above. Verify the checksum before running.</p>
             <span class="pill ok">Free · ready</span>
           </div>
-         </div>
-         <div class="platform-card available">
+          <div class="platform-card available hud">
             <div class="platform-head">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg>
               macOS 12+
@@ -145,37 +130,38 @@
           On first run, the app may download the Whisper <code>base</code> model once (about 145 MB) so dictation works
           offline from then on. Windows SmartScreen may show an "unknown publisher" warning until the build is
           code-signed — this is expected for unsigned executables and safe to click through after verifying the checksum. On macOS, the equivalent warning is bypassed once via Privacy & Security → "Open Anyway".
+        </p>
       </section>
 
       <section class="section shell" data-reveal>
         <div class="section-head center">
-          <p class="eyebrow">Get started in minutes</p>
+          <p class="eyebrow">Three steps</p>
           <h2>Download. Run. <span class="serif">Dictate.</span></h2>
         </div>
         <ol class="how-rail">
-          <li class="how-step">
+          <li class="how-step hud">
             <span class="step-no">01</span>
             <h3>Download</h3>
-            <p>Grab the portable executable above. No installer, no bloat.</p>
+            <p>Download the portable executable above. Run it.</p>
           </li>
-          <li class="how-step">
+          <li class="how-step hud">
             <span class="step-no">02</span>
             <h3>Run &amp; pin</h3>
             <p>Launch Extnded Thotz — it sits in your system tray, always ready.</p>
           </li>
-          <li class="how-step">
+          <li class="how-step hud">
             <span class="step-no">03</span>
             <h3>Dictate</h3>
-            <p>Hold <code>Ctrl+Windows</code>, speak, release. Polished text appears instantly.</p>
+            <p>Hold <code>Ctrl+Windows</code>, speak, release. Polished text appears at your cursor.</p>
           </li>
         </ol>
       </section>
 
       <section class="section final-cta shell" data-reveal>
         <div class="cta-glow" aria-hidden="true"></div>
-        <p class="eyebrow" style="justify-content: center;">Ready in seconds</p>
+        <p class="eyebrow center-flex">Free, in seconds</p>
         <h2>Say it once. <span class="serif">Have it everywhere.</span></h2>
-        <p class="lede">Hold <code>Ctrl+Windows</code>, speak, release. Polished text at your cursor, every time.</p>
+        <p class="lede">Hold <code>Ctrl+Windows</code>, speak, release. Polished text appears at your cursor.</p>
         <div class="hero-actions">
           <a class="button primary large" href="/downloads/ExtndedThotz.exe" download>Download for Windows — free</a>
           <a class="button ghost" href="/faq">Read the FAQ</a>

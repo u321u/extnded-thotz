@@ -34,18 +34,6 @@
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
-    <script>
-      document.documentElement.classList.remove("no-js");
-      window.addEventListener("load", function () {
-        setTimeout(function () {
-          if (!window.__revealReady) {
-            document.querySelectorAll("[data-reveal]").forEach(function (el) {
-              el.classList.add("is-visible");
-            });
-          }
-        }, 600);
-      });
-    </script>
     <script defer src="/script.js"></script>
 
     <script type="application/ld+json">
@@ -59,6 +47,16 @@
         "url": "https://extnded-thotz.vercel.app/",
         "downloadUrl": "https://extnded-thotz.vercel.app/download",
         "image": "https://extnded-thotz.vercel.app/assets/og.png",
+        "softwareVersion": "1.0.3",
+        "fileSize": "100MB",
+        "inLanguage": "en",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://extnded-thotz.vercel.app/download"
+        },
         "author": { "@type": "Organization", "name": "Scout Goat" }
       }
     </script>
@@ -117,14 +115,14 @@
             <div><dt>Free</dt><dd>forever, no account</dd></div>
             <div><dt>0.3s</dt><dd>release to text</dd></div>
             <div><dt>Local</dt><dd>whisper, on-device</dd></div>
-            <div><dt>~22 MB</dt><dd>portable exe</dd></div>
+            <div><dt>~100 MB</dt><dd>portable exe</dd></div>
           </dl>
         </div>
 
         <div>
-          <p class="keycap-row" style="margin-bottom: 14px;">
+          <p class="keycap-row keycap-lead">
             <kbd>Ctrl</kbd><kbd>Windows</kbd>
-            <span>hold to talk · release to paste</span>
+            <span>hold to talk — release to paste</span>
           </p>
           <div class="panel" id="console">
             <div class="panel-bar">
@@ -132,17 +130,17 @@
               <span class="panel-title" id="console-state">_idle</span>
             </div>
             <div class="panel-body" id="console-body" aria-live="polite">
-              <p class="dim">&gt; ready — speak anytime</p>
+              <p class="dim">&gt; ready — speak whenever</p>
             </div>
           </div>
           <div class="grid502">
             <div class="me">
               <span class="me-label">you say</span>
-              <p class="me-say">um yeah so basically i think we should uh move the launch to friday if thats ok</p>
+              <p class="me-say">um yeah so i think we should uh move the launch to friday if thats ok</p>
             </div>
             <div class="me">
               <span class="me-label">it types</span>
-              <p class="me-get">Yeah — I think we should move the launch to Friday, if that's OK.</p>
+              <p class="me-get">Yeah — I think we should move the launch to Friday if that's OK.</p>
             </div>
           </div>
         </div>
@@ -153,14 +151,14 @@
       <!-- ═══════════ VOICE STRIP ═══════════ -->
       <div class="voice-strip" data-reveal aria-label="Things people say while dictating">
         <div class="voice-track">
-          <span class="voice-chip"><b>invoice to Maria before Friday</b> — said it, didn't type it</span>
-          <span class="voice-chip"><b>ship the overlay</b> — mid-thought, no hands</span>
-          <span class="voice-chip"><b>standup note: rain effect done</b> — notes on the walk</span>
-          <span class="voice-chip"><b>reply: that works for me</b> — inbox zero at speaking pace</span>
-          <span class="voice-chip"><b>invoice to Maria before Friday</b> — said it, didn't type it</span>
-          <span class="voice-chip"><b>ship the overlay</b> — mid-thought, no hands</span>
-          <span class="voice-chip"><b>standup note: rain effect done</b> — notes on the walk</span>
-          <span class="voice-chip"><b>reply: that works for me</b> — inbox zero at speaking pace</span>
+          <span class="voice-chip"><b>invoice to Maria before Friday</b> — said it; didn't type it</span>
+          <span class="voice-chip"><b>ship the overlay</b> — mid-thought; no hands</span>
+          <span class="voice-chip"><b>standup note: rain effect done</b> — notes from the walk</span>
+          <span class="voice-chip"><b>reply: that works for me</b> — inbox zero, at speaking pace</span>
+          <span class="voice-chip"><b>invoice to Maria before Friday</b> — said it; didn't type it</span>
+          <span class="voice-chip"><b>ship the overlay</b> — mid-thought; no hands</span>
+          <span class="voice-chip"><b>standup note: rain effect done</b> — notes from the walk</span>
+          <span class="voice-chip"><b>reply: that works for me</b> — inbox zero, at speaking pace</span>
         </div>
       </div>
 
@@ -171,9 +169,9 @@
           <h2>Dictation that respects your privacy</h2>
         </div>
         <ul class="plain-points">
-          <li>Free to download and run — no payment, no account, no catch.</li>
+          <li>Free to download and run — no payment, no account.</li>
           <li>Local Whisper transcription — your audio never leaves the machine.</li>
-          <li>Global hotkey in any app — hold <code>Ctrl+Windows</code>, speak, release, text appears.</li>
+          <li>Global hotkey in any app — hold <code>Ctrl+Windows</code>, speak, release — text appears.</li>
         </ul>
       </section>
 
@@ -181,10 +179,10 @@
       <section class="section shell" id="features" data-reveal>
         <div class="section-head">
           <p class="eyebrow">Features</p>
-          <h2>Everything you need, <span class="serif">nothing you don't</span></h2>
+          <h2>Everything it does, <span class="serif">and nothing else</span></h2>
         </div>
         <div class="bento-grid">
-          <article class="bento-card bx-brand" data-reveal>
+          <article class="bento-card bx-brand hud" data-reveal>
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 3c-2.5 3-4.5 6.5-4.5 10a4.5 4.5 0 0 0 9 0c0-3.5-2-7-4.5-10Z"/></svg>
             </div>
@@ -193,7 +191,7 @@
             <span class="bento-metric"><strong>0 audio uploads</strong> — by design, not policy</span>
           </article>
 
-          <article class="bento-card bx-mp3" data-reveal>
+          <article class="bento-card bx-mp3 hud" data-reveal>
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M4 4h16v10a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V4Z"/><path d="m9 19-2 3m8-3 2 3"/><path d="M11.5 9.5v3m5-4.5-5 3-5-3v-3l5 3 5-3Z"/></svg>
             </div>
@@ -206,7 +204,7 @@
             </div>
           </article>
 
-          <article class="bento-card bx-hotkey" data-reveal>
+          <article class="bento-card bx-hotkey hud" data-reveal>
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 10h.01M12 10h.01M16 10h.01M9 14h6"/></svg>
             </div>
@@ -215,7 +213,7 @@
             <p class="keycap-row"><kbd>Ctrl</kbd><kbd>Windows</kbd></p>
           </article>
 
-          <article class="bento-card bx-clean" data-reveal class="dim-1">
+          <article class="bento-card bx-clean dim-1 hud" data-reveal>
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 2c-3 3.6-5 7.6-5 10.5a5 5 0 0 0 10 0C17 9.6 15 5.6 12 2Z"/></svg>
             </div>
@@ -223,7 +221,7 @@
             <p>A subtle overlay reacts to your voice while it listens, so you always know exactly when you're being transcribed.</p>
           </article>
 
-          <article class="bento-card bx-overlay" data-reveal class="dim-2">
+          <article class="bento-card bx-overlay dim-2 hud" data-reveal>
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/><path d="m9 12 2 2 4-4"/></svg>
             </div>
@@ -240,18 +238,18 @@
           <h2>From thought to text <span class="serif">in three seconds</span></h2>
         </div>
         <ol class="how-rail">
-          <li class="how-step">
+          <li class="how-step hud">
             <span class="step-no">01</span>
             <h3>Hold the hotkey</h3>
-            <p>Press and hold <code>Ctrl+Windows</code> in any app — your editor, browser, notes, email, or chat.</p>
+            <p>Press and hold <code>Ctrl+Windows</code> in any app — your editor, browser, notes, email, chat.</p>
             <p class="keycap-row"><kbd>Ctrl</kbd><kbd>Windows</kbd></p>
           </li>
-          <li class="how-step">
+          <li class="how-step hud">
             <span class="step-no">02</span>
             <h3>Speak naturally</h3>
             <p>The overlay reacts to your voice while Whisper transcribes locally. Talk the way you'd talk to a person.</p>
           </li>
-          <li class="how-step">
+          <li class="how-step hud">
             <span class="step-no">03</span>
             <h3>Release to insert</h3>
             <p>Clean, punctuated text lands at your cursor. Fillers trimmed, clipboard restored, flow unbroken.</p>
@@ -359,26 +357,26 @@
           <h2>Windows and <span class="serif">Mac</span></h2>
         </div>
         <div class="platform-strip">
-          <div class="platform-card available">
+          <div class="platform-card available hud">
             <div class="platform-head">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg>
               Windows 10 · 11
             </div>
             <h3>Available now</h3>
-            <p>Portable executable. ~22 MB. No installer, no Python, no account.</p>
+            <p>Portable executable. ~100 MB. No installer, no Python, no account.</p>
             <span class="pill ok">Free · ready</span>
             <div class="hero-actions">
               <a class="button primary" href="/download">Download for Windows</a>
             </div>
           </div>
-          <div class="platform-card available">
+          <div class="platform-card available hud">
             <div class="platform-head">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg>
               macOS 12+
             </div>
             <h3>Available now</h3>
             <p>Universal build for Intel and Apple Silicon. Ad-hoc signed — on first launch, right-click and choose Open.</p>
-            <span class="pill ok">Free · v1.0.2</span>
+            <span class="pill ok">Free · v1.0.3</span>
             <div class="hero-actions">
               <a class="button primary" href="https://github.com/u321u/extnded-thotz/releases/download/v1.0.2-mac/ExtndedThotz-macOS.zip" download>Download for macOS</a>
             </div>
@@ -389,9 +387,9 @@
       <!-- ═══════════ FINAL CTA ═══════════ -->
       <section class="section final-cta shell" data-reveal>
         <div class="cta-glow" aria-hidden="true"></div>
-        <p class="eyebrow" style="justify-content: center;">Pick it up now — it's free</p>
-        <h2>Enter the flow. <span class="serif">Never leave it.</span></h2>
-        <p class="lede">Hold <code>Ctrl+Windows</code>, speak, release — polished text every time.</p>
+        <p class="eyebrow center-flex">Download now — it's free</p>
+        <h2>Speak instead <span class="serif">of typing.</span></h2>
+        <p class="lede">Hold <code>Ctrl+Windows</code>, speak, release — polished text appears at your cursor.</p>
         <div class="hero-actions">
           <a class="button primary large" href="/download">
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
@@ -402,7 +400,7 @@
         <dl class="measures">
           <div><dt>Free</dt><dd>no account, no upsell</dd></div>
           <div><dt>Local</dt><dd>audio never uploaded</dd></div>
-          <div><dt>Portable</dt><dd>~22 MB, no installer</dd></div>
+          <div><dt>Portable</dt><dd>one file, no installer</dd></div>
         </dl>
       </section>
     </main>

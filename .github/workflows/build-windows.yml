@@ -1,0 +1,89 @@
+name: Build Windows app
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*-win"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+          pip install pyinstaller
+
+      - name: Unit tests
+        run: python -m pytest -q
+
+      - name: Build one-file executable
+        run: python -m PyInstaller --noconfirm --clean ExtndedThotz-win.spec
+
+      - name: Smoke test from a clean folder
+        shell: pwsh
+        run: |
+          # The shipped binary must run with nothing beside it. Copy it alone
+          # into an empty directory and stop relying on the checkout.
+          New-Item -ItemType Directory -Force -Path smoke | Out-Null
+          Copy-Item dist/ExtndedThotz.exe smoke/
+
+          # A tone is enough to prove the bundled ffmpeg + CTranslate2 + Whisper
+          # runtime loads and returns; accuracy is covered by the unit tests.
+          python -c "import math,struct,wave;w=wave.open('smoke/tone.wav','w');w.setnchannels(1);w.setsampwidth(2);w.setframerate(16000);w.writeframes(b''.join(struct.pack('<h',int(9000*math.sin(2*math.pi*220*i/16000))) for i in range(32000)));w.close()"
+
+          Push-Location smoke
+          $once = Start-Process -FilePath ./ExtndedThotz.exe -ArgumentList '--once','tone.wav' -Wait -PassThru
+          if ($once.ExitCode -ne 0) { throw "transcription smoke test exited $($once.ExitCode)" }
+
+          $gui = Start-Process -FilePath ./ExtndedThotz.exe -ArgumentList '--smoke','8','--profile','ci' -Wait -PassThru
+          if ($gui.ExitCode -ne 0) { throw "launch smoke test exited $($gui.ExitCode)" }
+          Pop-Location
+
+      - name: Write checksums
+        shell: pwsh
+        run: |
+          $exe = Get-Item dist/ExtndedThotz.exe
+          $mb = [math]::Round($exe.Length / 1MB, 1)
+          $hash = (Get-FileHash $exe.FullName -Algorithm SHA256).Hash.ToLower()
+          "$hash  ExtndedThotz.exe" | Out-File -Encoding ascii dist/SHA256SUMS.txt
+          "Built $($exe.Name): $mb MB, sha256 $hash"
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "## Windows build"
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "- size: $mb MB"
+          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "- sha256: ``$hash``"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ExtndedThotz-windows
+          path: |
+            dist/ExtndedThotz.exe
+            dist/SHA256SUMS.txt
+          retention-days: 30
+
+      - name: Attach to release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          name: Extnded Thotz for Windows ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            dist/ExtndedThotz.exe
+            dist/SHA256SUMS.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

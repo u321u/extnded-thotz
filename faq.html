@@ -15,7 +15,7 @@
     <meta property="og:title" content="FAQ — Extnded Thotz, free Windows voice dictation" />
     <meta
       property="og:description"
-      content="Privacy, compatibility, setup, and download size — straight answers about Extnded Thotz."
+      content="Privacy, compatibility, setup, and download size — the usual questions about Extnded Thotz."
     />
     <meta property="og:url" content="https://extnded-thotz.vercel.app/faq" />
     <meta property="og:image" content="https://extnded-thotz.vercel.app/assets/og.png" />
@@ -25,18 +25,6 @@
     <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <link rel="preload" href="/fonts/SpaceGrotesk-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
-    <script>
-      document.documentElement.classList.remove("no-js");
-      window.addEventListener("load", function () {
-        setTimeout(function () {
-          if (!window.__revealReady) {
-            document.querySelectorAll("[data-reveal]").forEach(function (el) {
-              el.classList.add("is-visible");
-            });
-          }
-        }, 600);
-      });
-    </script>
     <script defer src="/script.js"></script>
 
     <script type="application/ld+json">
@@ -44,15 +32,17 @@
         "@context": "https://schema.org",
         "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": "Is Extnded Thotz really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is completely free to download and use — no account, no license key, no upsell, no feature paywall." } },
+          { "@type": "Question", "name": "Is Extnded Thotz really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is completely free to download and use — no account, no license key, no upsell." } },
           { "@type": "Question", "name": "Does it send my audio to the cloud?", "acceptedAnswer": { "@type": "Answer", "text": "No. By default, transcription runs entirely on your machine using a local Whisper model. Your audio never leaves your computer." } },
           { "@type": "Question", "name": "Do I need Python installed?", "acceptedAnswer": { "@type": "Answer", "text": "No. The download is a portable Windows executable. Run it directly — no dependencies, no install wizard, nothing to configure." } },
           { "@type": "Question", "name": "Which platforms are supported?", "acceptedAnswer": { "@type": "Answer", "text": "Windows 10 and Windows 11 (64-bit), plus macOS 12 and later via a universal build (Intel and Apple Silicon). Both are on the download page." } },
           { "@type": "Question", "name": "Can I change the hotkey?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Open the settings window from the tray icon and record any key or chord. You can also switch between hold-to-talk and toggle mode." } },
           { "@type": "Question", "name": "Does it work in every app?", "acceptedAnswer": { "@type": "Answer", "text": "It works in virtually any app that accepts text input. If an app runs as Administrator, you must run Extnded Thotz as Administrator too (a Windows UIPI restriction)." } },
-          { "@type": "Question", "name": "How big is the download?", "acceptedAnswer": { "@type": "Answer", "text": "The Windows executable is about 22 MB and the macOS zip about 21 MB. On first run either may download the Whisper base model once, around 145 MB, so transcription works offline from then on." } },
+          { "@type": "Question", "name": "How big is the download?", "acceptedAnswer": { "@type": "Answer", "text": "The Windows executable is about 100 MB and the macOS zip about 21 MB. On first run either may download the Whisper base model once, around 145 MB, so transcription works offline from then on." } },
           { "@type": "Question", "name": "Is my clipboard safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app saves your clipboard before inserting dictated text and restores it immediately after, every time." } },
-          { "@type": "Question", "name": "Can I cancel mid-sentence?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Press ESC while recording to cancel — nothing is transcribed, nothing is inserted." } }
+          { "@type": "Question", "name": "Can I cancel mid-sentence?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Press ESC while recording to cancel — nothing is transcribed, nothing is inserted." } },
+          { "@type": "Question", "name": "Is there a macOS version?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is a universal build for Intel and Apple Silicon, ad-hoc signed. Recent macOS may warn that Apple could not verify it on first launch: click Done, then allow it once under System Settings, Privacy & Security, Open Anyway. The build is not notarized with a paid Apple certificate." } },
+          { "@type": "Question", "name": "Why does Windows SmartScreen warn me?", "acceptedAnswer": { "@type": "Answer", "text": "The build is not code-signed yet, so Windows shows an unknown publisher notice on first run. Check that the SHA-256 checksum on the download page matches, then click through. This is normal for unsigned portable software." } }
         ]
       }
     </script>
@@ -80,11 +70,11 @@
 
     <main id="main">
       <section class="section shell page-hero" data-reveal>
-        <p class="eyebrow">Straight answers</p>
+        <p class="eyebrow">FAQs</p>
         <h1>Frequently asked questions</h1>
         <p class="lede">
-          Privacy, compatibility, setup, download size — everything you might want to know
-          before picking up a free copy of Extnded Thotz.
+          Privacy, compatibility, setup, download size — the usual questions before you pick up
+          a free copy of Extnded Thotz.
         </p>
       </section>
 
@@ -92,7 +82,7 @@
         <div class="faq-grid">
           <details open>
             <summary>Is Extnded Thotz really free?</summary>
-            <p>Yes. It is completely free to download and use — no account, no license key, no upsell, no feature paywall.</p>
+            <p>Yes. It is completely free to download and use — no account, no license key, no upsell.</p>
           </details>
           <details>
             <summary>Does it send my audio to the cloud?</summary>
@@ -112,11 +102,11 @@
           </details>
           <details>
             <summary>Does it work in every app?</summary>
-            <p>It works in virtually any app that accepts text input — VS Code, Slack, Notepad++, Chrome, Firefox, Outlook, and more. If an app runs as Administrator, you will need to run Extnded Thotz as Administrator too (a Windows UIPI restriction), otherwise the paste is blocked.</p>
+            <p>It works in virtually any app that accepts text input—VS Code, Slack, Notepad++, Chrome, Firefox, Outlook, and more. If an app runs as Administrator, you will need to run Extnded Thotz as Administrator too (a Windows UIPI restriction), otherwise the paste is blocked.</p>
           </details>
           <details>
             <summary>How big is the download?</summary>
-            <p>The executable is about 22 MB and the macOS zip about 21 MB. On first run either may download the Whisper base model once, around 145 MB, so transcription works offline from then on.</p>
+            <p>The executable is about 100 MB and the macOS zip about 21 MB. On first run either may download the Whisper base model once, around 145 MB, so transcription works offline from then on.</p>
           </details>
           <details>
             <summary>Is my clipboard safe?</summary>

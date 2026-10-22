@@ -11,3 +11,6 @@ public/downloads/*.exe
 public/downloads/*.zip
 pyinstaller.out.log
 pyinstaller.err.log
+tmp_*.log
+smoke/
+.agents/

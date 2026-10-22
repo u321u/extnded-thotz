@@ -17,3 +17,6 @@ launcher.py
 scripts/
 extnded_thotz/
 pyi_rth_ctranslate2.py
+tmp_*.py
+AGENTS.md
+.agents/

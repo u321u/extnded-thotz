@@ -3,6 +3,8 @@
 (function () {
   "use strict";
 
+  document.documentElement.classList.remove("no-js");
+
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- reveal ---------- */
@@ -46,20 +48,41 @@
   var columns = [];
   var colWidth = 0;
   var colCount = 0;
+  var vw = 0;
+  var vh = 0;
+  var MAX_TRAIL = 9;
+
+  // Tail colours are precomputed: building "rgba(...)" per glyph per frame
+  // allocates a few thousand strings a second for no visual gain.
+  var TRAIL_COLOR = [];
+  for (var t = 1; t <= MAX_TRAIL; t++) {
+    TRAIL_COLOR[t] = [];
+    for (var k = 0; k < t; k++) {
+      TRAIL_COLOR[t][k] = "rgba(53, 224, 122, " + ((1 - k / t) * 0.5).toFixed(3) + ")";
+    }
+  }
+
+  function randGlyph() {
+    return Math.floor(Math.random() * GLYPHS.length);
+  }
 
   function resize() {
-    var dpr = window.devicePixelRatio || 1;
-    canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(window.innerHeight * dpr);
+    // cap the pixel ratio: retina density buys nothing here and doubles the fill cost
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    vw = window.innerWidth;
+    vh = window.innerHeight;
+    canvas.width = Math.floor(vw * dpr);
+    canvas.height = Math.floor(vh * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     colWidth = FONT_SIZE;
-    colCount = Math.ceil(window.innerWidth / colWidth);
+    colCount = Math.ceil(vw / colWidth);
     columns = [];
     for (var i = 0; i < colCount; i++) {
       columns[i] = {
-        y: Math.floor((Math.random() * -40) * 1),
-        speed: 0.4 + Math.random() * 0.7,
-        glyphIdx: Math.floor(Math.random() * GLYPHS.length)
+        y: -Math.random() * 40,
+        speed: 0.35 + Math.random() * 0.8,
+        glyph: randGlyph(),
+        trail: 3 + Math.floor(Math.random() * MAX_TRAIL)
       };
     }
   }
@@ -73,36 +96,55 @@
     if (ts - lastTick < FRAME_MS) return;
     lastTick = ts;
 
-    // trail fade
-    ctx.fillStyle = "rgba(2, 6, 4, 0.22)";
-    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    // trail fade — short enough to keep ghosts, long enough to read as rain
+    ctx.fillStyle = "rgba(2, 6, 4, 0.2)";
+    ctx.fillRect(0, 0, vw, vh);
     ctx.font = FONT_SIZE + "px 'IBM Plex Mono', monospace";
+    ctx.textBaseline = "top";
 
     for (var i = 0; i < colCount; i++) {
       var col = columns[i];
       col.y += col.speed;
       if (col.speed >= 1) col.y += col.speed - 1;
-      if (col.y * FONT_SIZE > window.innerHeight + 120) {
-        col.y = Math.floor((Math.random() * -30) * 1);
-        col.speed = 0.4 + Math.random() * 0.7;
-        col.glyphIdx = Math.floor(Math.random() * GLYPHS.length);
-      }
-      var y = col.y * FONT_SIZE;
-      if (y > 0) {
-        // head glyph: brightest
-        var ch = GLYPHS[col.glyphIdx];
-        ctx.fillStyle = "rgba(138, 255, 180, 0.9)";
-        ctx.shadowColor = "rgba(53, 224, 122, 0.8)";
-        ctx.shadowBlur = 8;
-        ctx.fillText(ch, i * colWidth, y);
-        ctx.shadowBlur = 0;
 
-        // occasional tail glyph: dimmer
-        if (Math.random() < 0.5) {
-          var tail = GLYPHS[(col.glyphIdx + 7) % GLYPHS.length];
-          ctx.fillStyle = "rgba(53, 224, 122, 0.35)";
-          ctx.fillText(tail, i * colWidth, y - FONT_SIZE);
-        }
+      var headY = col.y * FONT_SIZE;
+      if (headY > vh + 120) {
+        col.y = -Math.random() * 30;
+        col.speed = 0.35 + Math.random() * 0.8;
+        col.glyph = randGlyph();
+        col.trail = 3 + Math.floor(Math.random() * MAX_TRAIL);
+        continue;
+      }
+      if (headY < -FONT_SIZE) continue;
+
+      // tail: dimmer glyphs trailing above the head
+      for (var k = 1; k < col.trail; k++) {
+        var ty = headY - k * FONT_SIZE;
+        if (ty < -FONT_SIZE || ty > vh) continue;
+        ctx.fillStyle = TRAIL_COLOR[col.trail][k];
+        ctx.fillText(GLYPHS[(col.glyph + k * 3) % GLYPHS.length], i * colWidth, ty);
+      }
+
+      // head: brightest, with bloom
+      ctx.fillStyle = "rgba(160, 255, 195, 0.92)";
+      ctx.shadowColor = "rgba(53, 224, 122, 0.85)";
+      ctx.shadowBlur = 9;
+      ctx.fillText(GLYPHS[col.glyph], i * colWidth, headY);
+      ctx.shadowBlur = 0;
+
+      // slow glyph mutation so columns never repeat
+      if (Math.random() < 0.06) col.glyph = randGlyph();
+    }
+
+    // rare signal glitch: stray glyphs flare across the field
+    if (Math.random() < 0.035) {
+      for (var g = 0; g < 5; g++) {
+        ctx.fillStyle = "rgba(138, 255, 180, 0.45)";
+        ctx.fillText(
+          GLYPHS[randGlyph()],
+          Math.floor(Math.random() * colCount) * colWidth,
+          Math.random() * vh
+        );
       }
     }
   }
@@ -161,7 +203,7 @@
         return wait(900);
       }).then(function () {
         state.textContent = "_injecting";
-        var out = mk("gold", "> ");
+        var out = mk(null, "> ");
         var span = document.createElement("span");
         out.appendChild(span);
         var caret = document.createElement("span");
@@ -173,7 +215,7 @@
           var step = function () {
             if (i < scene.typed.length) {
               span.textContent = scene.typed.slice(0, ++i);
-              window.setTimeout(step, 24 + Math.random() * 30);
+              window.setTimeout(step, 22 + Math.random() * 24);
             } else {
               caret.remove();
               done();
@@ -183,7 +225,7 @@
         });
       }).then(function () {
         state.textContent = "_idle";
-        return wait(2600);
+        return wait(2400);
       });
     };
 

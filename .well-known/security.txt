@@ -1,0 +1,9 @@
+Contact: mailto:hello@scoutgoat.com
+Policy: https://extnded-thotz.vercel.app/security
+Acknowledgments: https://extnded-thotz.vercel.app/security
+Canonical: https://extnded-thotz.vercel.app/.well-known/security.txt
+Expires: 2027-01-01T00:00:00Z
+
+This project welcomes responsible disclosure of security vulnerabilities.
+Please email the contact address above with a description of the issue.
+Do not open public issues for unpatched security problems.
