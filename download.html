@@ -38,6 +38,8 @@
         }, 600);
       });
     </script>
+
+    
     <script defer src="/script.js"></script>
   </head>
   <body>
@@ -70,6 +72,8 @@
           One portable executable. No installer, no Python, no account.
           Transcription runs locally — your audio never leaves your machine.
         </p>
+
+        
 
         <div class="download-card" data-reveal>
           <div>
@@ -117,7 +121,8 @@
             <p>The executable above. Verify the checksum before running.</p>
             <span class="pill ok">Free · ready</span>
           </div>
-          <div class="platform-card available">
+         </div>
+         <div class="platform-card available">
             <div class="platform-head">
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 18h6"/></svg>
               macOS 12+
@@ -130,7 +135,7 @@
               <p>1. Unzip and drag ExtndedThotz.app to Applications.<br />
               2. Double-click it once — macOS will warn.<br />
               3. Click <strong>Done</strong> (don't move to Trash).<br />
-              4. Open <strong>System Settings → Privacy &amp; Security</strong>, scroll to the Security section, and click <strong>"Open Anyway"</strong> next to ExtndedThotz.<br />
+              4. Open <strong>System Settings → Privacy & Security</strong>, scroll to the Security section, and click <strong>"Open Anyway"</strong> next to ExtndedThotz.<br />
               5. Click Open. macOS remembers this — every launch after is normal.</p>
             </details>
           </div>
@@ -139,8 +144,7 @@
         <p class="fineprint">
           On first run, the app may download the Whisper <code>base</code> model once (about 145 MB) so dictation works
           offline from then on. Windows SmartScreen may show an "unknown publisher" warning until the build is
-          code-signed — this is expected for unsigned executables and safe to click through after verifying the checksum.
-        </p>
+          code-signed — this is expected for unsigned executables and safe to click through after verifying the checksum. On macOS, the equivalent warning is bypassed once via Privacy & Security → "Open Anyway".
       </section>
 
       <section class="section shell" data-reveal>

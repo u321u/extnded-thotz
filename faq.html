@@ -52,8 +52,7 @@
           { "@type": "Question", "name": "Does it work in every app?", "acceptedAnswer": { "@type": "Answer", "text": "It works in virtually any app that accepts text input. If an app runs as Administrator, you must run Extnded Thotz as Administrator too (a Windows UIPI restriction)." } },
           { "@type": "Question", "name": "How big is the download?", "acceptedAnswer": { "@type": "Answer", "text": "The Windows executable is about 22 MB and the macOS zip about 21 MB. On first run either may download the Whisper base model once, around 145 MB, so transcription works offline from then on." } },
           { "@type": "Question", "name": "Is my clipboard safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app saves your clipboard before inserting dictated text and restores it immediately after, every time." } },
-          { "@type": "Question", "name": "Can I cancel mid-sentence?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Press ESC while recording to cancel — nothing is transcribed, nothing is inserted." } },
-          { "@type": "Question", "name": "Is there a macOS version?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. A universal macOS build (Intel and Apple Silicon) is on the download page. It is ad-hoc signed, so the first launch may require one approval in System Settings → Privacy & Security → Open Anyway." } }
+          { "@type": "Question", "name": "Can I cancel mid-sentence?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Press ESC while recording to cancel — nothing is transcribed, nothing is inserted." } }
         ]
       }
     </script>
@@ -104,12 +103,8 @@
             <p>No. The download is a portable Windows executable. Run it directly — no dependencies, no install wizard, nothing to configure.</p>
           </details>
           <details>
-            <summary>Is there a macOS version?</summary>
-            <p>Yes — <a href="https://github.com/u321u/extnded-thotz/releases/download/v1.0.2-mac/ExtndedThotz-macOS.zip" download>download it here</a>. It is a universal build (Intel and Apple Silicon), ad-hoc signed so it can be opened. Recent macOS may warn "Apple could not verify" on the first double-click: click Done, then open <strong>System Settings → Privacy &amp; Security</strong> and press <strong>"Open Anyway"</strong>. This one-time approval is needed because the build isn't notarized with a paid Apple certificate.</p>
-          </details>
-          <details>
             <summary>Which platforms are supported?</summary>
-            <p>Windows 10 and 11 (64-bit), plus macOS 12 and later via a universal build (Intel and Apple Silicon). Both download cards are on the <a href="/download">download page</a>.</p>
+            <p>Windows 10 and 11 (64-bit), plus macOS 12 and later via a universal build (Intel and Apple Silicon). Both are on the <a href="/download">download page</a>.</p>
           </details>
           <details>
             <summary>Can I change the hotkey?</summary>
@@ -121,7 +116,7 @@
           </details>
           <details>
             <summary>How big is the download?</summary>
-            <p>The executable is about 22 MB. On first run it may download the Whisper base model once, around 145 MB, so transcription works offline from then on.</p>
+            <p>The executable is about 22 MB and the macOS zip about 21 MB. On first run either may download the Whisper base model once, around 145 MB, so transcription works offline from then on.</p>
           </details>
           <details>
             <summary>Is my clipboard safe?</summary>
@@ -132,8 +127,13 @@
             <p>Yes. Press ESC while recording to cancel — nothing is transcribed, nothing is inserted.</p>
           </details>
           <details>
+            <summary>Is there a macOS version?</summary>
+            <p>Yes — <a href="https://github.com/u321u/extnded-thotz/releases/download/v1.0.2-mac/ExtndedThotz-macOS.zip" download>download it here</a>. It is a universal build (Intel and Apple Silicon), ad-hoc signed so it can be opened. Recent macOS may warn "Apple could not verify" on the first double-click: click Done, then open <strong>System Settings → Privacy & Security</strong> and press <strong>"Open Anyway"</strong>. This one-time approval is needed because the build isn't notarized with a paid Apple certificate.
+          </p>
+          </details>
+          <details>
             <summary>Why does Windows SmartScreen warn me?</summary>
-            <p>The build is not code-signed yet, so Windows shows an "unknown publisher" notice on first run. Verify the SHA-256 checksum on the download page matches, then click through. This is normal for unsigned portable software. On macOS, the equivalent warning is bypassed once via Privacy &amp; Security → "Open Anyway".</p>
+            <p>The build is not code-signed yet, so Windows shows an "unknown publisher" notice on first run. Verify the SHA-256 checksum on the download page matches, then click through. This is normal for unsigned portable software.</p>
           </details>
         </div>
 

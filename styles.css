@@ -247,6 +247,9 @@ a { color: inherit; }
   content: ""; width: 26px; height: 1px;
   background: var(--phos); opacity: 0.7;
 }
+/* centers a flex row (e.g. the eyebrow on the 404 page, whose section is
+   text-align: center but whose flex children would otherwise sit left) */
+.center-flex { justify-content: center; }
 
 /* ---------- header / nav ---------- */
 .topbar {
@@ -874,6 +877,10 @@ kbd {
   gap: 14px;
   max-width: 900px;
   margin: 0 auto;
+}
+/* single card (Windows-only) spans the full row instead of half */
+.platform-strip:has(> :only-child) {
+  grid-template-columns: 1fr;
 }
 .platform-card {
   border: 1px solid var(--line);
