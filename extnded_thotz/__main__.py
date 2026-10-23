@@ -132,7 +132,11 @@ def main(argv=None) -> int:
         root.after(int(args.smoke * 1000), app.quit)
     root.mainloop()
     guard.close()
-    return 0
+    # PortAudio teardown can block forever when a microphone open was abandoned
+    # inside a wedged driver, leaving the app's process alive after quit.
+    sys.stdout.flush()
+    logging.shutdown()
+    os._exit(0)
 
 
 if __name__ == "__main__":

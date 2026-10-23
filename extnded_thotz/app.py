@@ -64,9 +64,10 @@ class DictationApp:
         self.binder.bind()
         if self.cfg.get("preload_model") and self.backend.name == "local":
             threading.Thread(target=self._preload, daemon=True, name="model-preload").start()
-        # Find a mic that actually carries signal before the first dictation —
-        # the Windows default can be muted/dead yet still open without error.
-        self.recorder.schedule_probe()
+        # No startup probe: it opened every endpoint (including dead virtual
+        # ones) before the first dictation and could leave the audio stack stuck.
+        # The recorder opens the OS default / pinned mic first, and only scans
+        # for another device after a capture actually turns out silent.
         threading.Thread(target=self._watch_config, daemon=True, name="config-watch").start()
         log.info(
             "Extnded Thotz ready — %s '%s' to dictate (backend=%s, model=%s)",
@@ -76,6 +77,13 @@ class DictationApp:
 
     def quit(self) -> None:
         self._stop_event.set()
+        # Destroy the window first: unbinding the global hook waits for the
+        # hotkey callback, which can be stuck inside a wedged audio driver.
+        # Tearing the window down first means Quit always works.
+        try:
+            self.root.after(0, self.root.destroy)
+        except Exception:
+            pass
         try:
             self.binder.unbind()
         except Exception:
@@ -85,7 +93,6 @@ class DictationApp:
                 self.tray_icon.stop()
             except Exception:
                 pass
-        self.root.after(0, self.root.destroy)
 
     def _preload(self) -> None:
         try:
