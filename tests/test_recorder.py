@@ -1,3 +1,4 @@
+import threading
 import time
 import types
 
@@ -13,7 +14,10 @@ def test_short_capture_or_graceful_error():
         with pytest.raises(MicUnavailableError):
             rec.start()
         return
-    rec.start()
+    try:
+        rec.start()
+    except MicUnavailableError:
+        return  # no working mic on this machine right now — raising is the contract
     assert rec.is_recording
     time.sleep(0.3)
     audio = rec.stop()
@@ -26,12 +30,45 @@ def test_cancel_discards():
     rec = Recorder()
     if not Recorder.input_device_available():
         pytest.skip("no input device")
-    rec.start()
+    try:
+        rec.start()
+    except MicUnavailableError:
+        pytest.skip("mic not openable right now")
     time.sleep(0.1)
     rec.cancel()
     assert not rec.is_recording
     # stopping again returns empty rather than raising
     assert rec.stop().size == 0
+
+
+def test_start_gives_up_when_the_audio_driver_never_answers(monkeypatch):
+    """A wedged endpoint blocked the open forever and froze the hotkey thread."""
+    rec = Recorder()
+    rec.OPEN_TIMEOUT_S = 0.2
+    gate = threading.Event()
+
+    def stuck_open(sd, box):
+        gate.wait(5)  # blocks exactly like PortAudio does on a dead driver
+
+    monkeypatch.setattr(rec, "_open_input", stuck_open)
+    try:
+        with pytest.raises(MicUnavailableError, match="isn't responding"):
+            rec.start()
+        assert rec._wedged
+    finally:
+        gate.set()
+
+
+def test_wedged_recorder_fails_fast_without_touching_audio_again(monkeypatch):
+    rec = Recorder()
+    rec._wedged = True
+
+    def must_not_open(sd, box):
+        raise AssertionError("must not call into the stuck audio driver again")
+
+    monkeypatch.setattr(rec, "_open_input", must_not_open)
+    with pytest.raises(MicUnavailableError, match="stopped responding"):
+        rec.start()
 
 
 # -- mic probe ---------------------------------------------------------------

@@ -98,6 +98,7 @@ class DictationApp:
     def _hotkey_start(self) -> None:
         if not self.enabled or self.busy:
             return
+        log.info("Hotkey fired — opening the microphone")
         try:
             self.recorder.start()
         except MicUnavailableError as exc:

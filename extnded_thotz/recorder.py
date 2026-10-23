@@ -36,6 +36,7 @@ class Recorder:
         self._current_device = None
         self._probe_thread = None
         self._probe_stop = threading.Event()  # set by start() to abort a probe
+        self._wedged = False  # audio driver stopped answering; stop opening
 
     @staticmethod
     def input_device_available() -> bool:
@@ -161,11 +162,17 @@ class Recorder:
         rest = [i for i in self._input_candidates(sd) if i not in preferred]
         return preferred + rest
 
+    OPEN_TIMEOUT_S = 6.0
+
     def start(self) -> None:
         try:
             import sounddevice as sd
         except Exception as exc:
             raise MicUnavailableError(f"No microphone available: {exc}") from exc
+        if self._wedged:
+            raise MicUnavailableError(
+                "The microphone stopped responding — restart the audio device or reboot."
+            )
         # A running probe opens devices too; let it finish before we open one,
         # otherwise exclusive WDM-KS opens collide ("Device unavailable") and
         # the probe's in-flight read could outlast our recording attempt.
@@ -177,6 +184,33 @@ class Recorder:
             self._frames = []
             self._input_level = 0.0
 
+        # PortAudio opens call straight into the audio driver, and a wedged
+        # endpoint (driver fault, a conflicting exclusive-mode app) blocks
+        # inside the call with no error at all. That froze the hotkey thread,
+        # so the app looked dead: no overlay, no text, no log line. Bound the
+        # wait and give up on audio for this session instead — stacking more
+        # opens behind a stuck driver can take the whole process down.
+        box: dict = {}
+        opener = threading.Thread(
+            target=self._open_input, args=(sd, box), daemon=True, name="mic-open"
+        )
+        opener.start()
+        opener.join(self.OPEN_TIMEOUT_S)
+        if opener.is_alive():
+            self._wedged = True
+            log.error(
+                "Microphone open did not return within %.0fs — the audio driver is wedged",
+                self.OPEN_TIMEOUT_S,
+            )
+            raise MicUnavailableError(
+                "The microphone isn't responding. Another app may be holding it, or "
+                "the audio driver is stuck — a reboot clears it."
+            )
+        if "error" in box:
+            raise MicUnavailableError(f"Could not open microphone: {box['error']}")
+
+    def _open_input(self, sd, box: dict) -> None:
+        """Try each candidate device; store the working stream or the last error."""
         failures = []
         for device in self._ordered_candidates(sd):
             stream = None
@@ -205,8 +239,7 @@ class Recorder:
                     except Exception:
                         pass
         self._stream = None
-        detail = failures[-1] if failures else "no input devices found"
-        raise MicUnavailableError(f"Could not open microphone: {detail}")
+        box["error"] = failures[-1] if failures else "no input devices found"
 
     @staticmethod
     def _input_candidates(sd) -> list[int]:
